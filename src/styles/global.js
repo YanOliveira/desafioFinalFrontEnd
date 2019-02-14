@@ -13,10 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body{
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    font-family: 'Montserrat', sans-serif;
-    background: #181818;
-    color: #fff;
-    font-size: 40px;
+    font-family: 'Helvetica', sans-serif;
   }
 `;
 

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { Container } from './styles';
+import Header from '../../components/Header';
 
 class Main extends Component {
   static propTypes = {};
@@ -11,7 +12,11 @@ class Main extends Component {
   state = {};
 
   render() {
-    return <Container>REACT JS</Container>;
+    return (
+      <Container>
+        <Header />
+      </Container>
+    );
   }
 }
 const mapStateToProps = state => ({});

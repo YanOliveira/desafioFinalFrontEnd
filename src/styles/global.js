@@ -15,6 +15,13 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     font-family: 'Helvetica', sans-serif;
   }
+  ul{
+    list-style: none;
+    display: flex;
+  }
+  a{
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;

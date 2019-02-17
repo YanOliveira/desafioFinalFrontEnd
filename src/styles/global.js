@@ -22,6 +22,13 @@ const GlobalStyle = createGlobalStyle`
   a{
     text-decoration: none;
   }
+  button{
+    border: 0;
+  }
+  input{
+    border:0;
+    outline: none;
+  }
 `;
 
 export default GlobalStyle;

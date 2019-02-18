@@ -53,5 +53,9 @@ export const Form = styled.form`
     color: ${colors.lighter};
     background: ${colors.primary};
     font-weight: bold;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
   }
 `;

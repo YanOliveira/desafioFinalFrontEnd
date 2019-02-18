@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Container } from './styles';
 import Header from '../../components/Header';
 
-class Main extends Component {
+class Dashboard extends Component {
   static propTypes = {};
 
   state = {};
@@ -25,4 +25,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(null, dispatch);
 export default connect(
   null,
   null,
-)(Main);
+)(Dashboard);

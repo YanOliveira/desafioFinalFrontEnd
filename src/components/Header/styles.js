@@ -38,7 +38,21 @@ export const Profile = styled.div`
   height: 30px;
   width: 30px;
   font-size: ${fonts.larger}px;
+  div {
+    display: none;
+    background: #fff;
+    position: absolute;
+    width: 100px;
+    margin-top: 40px;
+    ul {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   &:hover {
     cursor: pointer;
+    div {
+      display: flex;
+    }
   }
 `;

@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { Container, Nav, Profile } from './styles';
+import {
+  Container, Nav, Profile, ProfileMenu,
+} from './styles';
 import LogoIcon from '../../assets/images/logo-white.svg';
 
 const Header = () => (
@@ -26,6 +28,12 @@ const Header = () => (
     </Nav>
     <Profile>
       <FontAwesomeIcon icon={faUser} />
+      <div>
+        <ul>
+          <li>menu 1</li>
+          <li>menu 2</li>
+        </ul>
+      </div>
     </Profile>
   </Container>
 );

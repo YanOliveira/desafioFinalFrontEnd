@@ -42,6 +42,10 @@ export const Form = styled.form`
     padding: 10px;
     font-size: ${fonts.large}px;
     color: ${colors.lighter};
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
+      -webkit-text-fill-color: #fff !important;
+    }
   }
 
   button {
@@ -53,5 +57,9 @@ export const Form = styled.form`
     color: ${colors.lighter};
     background: ${colors.primary};
     font-weight: bold;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
   }
 `;

@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-
+import { withRouter, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { creators as SessionsActions } from '../../store/ducks/sessions';
-
 import { Container, Content, Form } from './styles';
 import LogoIcon from '../../assets/images/logo.svg';
+
 
 class SignIn extends Component {
   state = {
     email: '',
     password: '',
+  };
+
+  static propTypes = {
+    createSessionRequest: PropTypes.func.isRequired,
+    history: PropTypes.shape().isRequired,
   };
 
   handleSignIn = (e) => {
@@ -44,7 +49,7 @@ class SignIn extends Component {
             />
             <button type="submit">Entrar</button>
           </Form>
-          <a href="/signup">Criar conta grátis</a>
+          <Link to="/signup">Criar conta grátis</Link>
         </Content>
       </Container>
     );

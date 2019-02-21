@@ -22,13 +22,13 @@ export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_REQUEST:
       return { ...state, loading: true, error: null };
-    case Types.ADD_SUCCESS:      
+    case Types.ADD_SUCCESS:
       action.payload.history.push('/signin');
-      toast.success('Usuário criado com sucesso, já pode fazer login !');
+      toast.success('Usuário criado com sucesso, já pode fazer login !', { autoClose: 3000 });
       return { ...state, loading: true, error: null };
     case Types.ADD_FAILURE:
       action.payload.errors.map((error) => {
-        toast.error(error.message);
+        toast.error(error.message, { autoClose: 3000 });
       });
       return { ...state, loading: true, error: null };
     default:

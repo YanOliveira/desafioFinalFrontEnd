@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, metrics, fonts } from '../../styles/defaults';
+import { colors } from '../../styles/defaults';
 
 export const Container = styled.div`
   height: 100%;

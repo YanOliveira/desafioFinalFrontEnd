@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, metrics, fonts } from '../../styles/defaults';
+import { colors, fonts } from '../../styles/defaults';
 
 export const Container = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ export const Content = styled.div`
     margin-bottom: 10px;
   }
   a {
-    font-size: ${fonts.regular}px;
+    font-size: ${fonts.regular};
     color: ${colors.regular};
   }
 `;
@@ -31,7 +31,7 @@ export const Form = styled.form`
   justify-content: center;
   span {
     margin: 0 10px;
-    font-size: ${fonts.regular}px;
+    font-size: ${fonts.regular};
     color: ${colors.lighter};
     margin-top: 20px;
   }
@@ -40,11 +40,11 @@ export const Form = styled.form`
     background: transparent;
     width: 300px;
     padding: 10px;
-    font-size: ${fonts.large}px;
+    font-size: ${fonts.large};
     color: ${colors.lighter};
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
-      -webkit-text-fill-color: #fff !important;
+      -webkit-text-fill-color: ${colors.white} !important;
     }
   }
 
@@ -53,7 +53,7 @@ export const Form = styled.form`
     width: 300px;
     height: 50px;
     border-radius: 30px;
-    font-size: ${fonts.regular}px;
+    font-size: ${fonts.regular};
     color: ${colors.lighter};
     background: ${colors.primary};
     font-weight: bold;

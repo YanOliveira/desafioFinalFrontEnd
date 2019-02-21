@@ -9,7 +9,7 @@ import Routes from './routes';
 const App = () => (
   <Provider store={store}>
     <GlobalStyle />
-    <ToastContainer autoClose={5000} />
+    <ToastContainer />
     <Routes />
   </Provider>
 );

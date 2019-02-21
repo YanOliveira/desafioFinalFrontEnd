@@ -2,15 +2,24 @@ import React from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import {
-  Container, Nav, Profile, ProfileMenu,
-} from './styles';
+import { faUser, faEdit, faWindowClose } from '@fortawesome/free-regular-svg-icons';
+import { Container, Nav, Profile } from './styles';
+import { creators as SessionsActions } from '../../store/ducks/sessions';
 import LogoIcon from '../../assets/images/logo-white.svg';
 
-const Header = () => (
+const handleLogout = (props) => {
+  props.destroySessionRequest(props.history);
+};
+handleLogout.propTypes = {
+  destroySessionRequest: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired,
+};
+
+const Header = props => (
   <Container>
     <Nav>
       <img src={LogoIcon} alt="Meetups App" />
@@ -27,11 +36,19 @@ const Header = () => (
       </ul>
     </Nav>
     <Profile>
-      <FontAwesomeIcon icon={faUser} />
+      <FontAwesomeIcon className="iconHeader" icon={faUser} />
       <div>
         <ul>
-          <li>menu 1</li>
-          <li>menu 2</li>
+          <Link to="/profile">
+            <li>
+              <FontAwesomeIcon className="icon" icon={faEdit} />
+              Perfil
+            </li>
+          </Link>
+          <li onClick={() => handleLogout(props)}>
+            <FontAwesomeIcon className="icon" icon={faWindowClose} />
+            Sair
+          </li>
         </ul>
       </div>
     </Profile>
@@ -39,8 +56,11 @@ const Header = () => (
 );
 
 const mapStateToProps = state => ({});
-const mapDispatchToProps = dispatch => bindActionCreators(null, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(SessionsActions, dispatch);
 
-export default connect()(Header);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withRouter(Header));
 // mapStateToProps,
 // mapDispatchToProps

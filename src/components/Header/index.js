@@ -55,7 +55,7 @@ const Header = props => (
   </Container>
 );
 
-const mapStateToProps = state => ({});
+// const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => bindActionCreators(SessionsActions, dispatch);
 
 export default connect(

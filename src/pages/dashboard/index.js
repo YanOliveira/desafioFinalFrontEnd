@@ -9,11 +9,12 @@ import { Container } from './styles';
 import Header from '../../components/Header';
 
 class Dashboard extends Component {
-  static propTypes = {};
-
-  state = {
-    teste: [1, 2, 3],
+  static propTypes = {
+    getSessionsRequest: PropTypes.func.isRequired,
+    history: PropTypes.shape.isRequired,
   };
+
+  state = {};
 
   componentDidMount() {
     const { getSessionsRequest, history } = this.props;
@@ -24,7 +25,6 @@ class Dashboard extends Component {
     return (
       <Container>
         <Header />
-        {this.state.teste.length >= 1 ? <h1>Dashboard</h1> : <h1>Preferences</h1>}
       </Container>
     );
   }

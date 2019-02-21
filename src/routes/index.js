@@ -4,6 +4,7 @@ import PrivateRoute from './privateRoute';
 import WithoutAuthenticationRoute from './withoutAuthenticationRoute';
 
 import Dashboard from '../pages/dashboard';
+import Preferences from '../pages/preferences';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 
@@ -12,6 +13,7 @@ const Routes = () => (
     <Fragment>
       <Switch>
         <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute path="/preferences" component={Preferences} />
         <WithoutAuthenticationRoute path="/signin" component={SignIn} />
         <WithoutAuthenticationRoute path="/signup" component={SignUp} />
       </Switch>

@@ -4,9 +4,6 @@ import { toast } from 'react-toastify';
  * TYPES
  */
 export const Types = {
-  GET_REQUEST: 'sessions/GET_REQUEST',
-  GET_SUCCESS: 'sessions/GET_SUCCESS',
-
   CREATE_REQUEST: 'sessions/CREATE_REQUEST',
   CREATE_SUCCESS: 'sessions/CREATE_SUCCESS',
   CREATE_FAILURE: 'sessions/CREATE_FAILURE',
@@ -25,14 +22,6 @@ const INITIAL_STATE = {
 
 export default function sessions(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.GET_REQUEST:
-      return { ...state, loading: false };
-    case Types.GET_SUCCESS:
-      if (action.payload.countSessions <= 1) {
-        action.payload.history.push('/preferences');
-      }
-      return { ...state, loading: false };
-
     case Types.CREATE_REQUEST:
       return { ...state, loading: true };
     case Types.CREATE_SUCCESS:
@@ -62,22 +51,13 @@ export default function sessions(state = INITIAL_STATE, action) {
  * ACTIONS
  */
 export const creators = {
-  getSessionsRequest: history => ({
-    type: Types.GET_REQUEST,
-    payload: { history },
-  }),
-  getSessionsSuccess: (countSessions, history) => ({
-    type: Types.GET_SUCCESS,
-    payload: { countSessions, history },
-  }),
-
   createSessionRequest: (user, history) => ({
     type: Types.CREATE_REQUEST,
     payload: { user, history },
   }),
-  createSessionSuccess: (user, history) => ({
+  createSessionSuccess: history => ({
     type: Types.CREATE_SUCCESS,
-    payload: { user, history },
+    payload: { history },
   }),
   createSessionFailure: error => ({
     type: Types.CREATE_FAILURE,

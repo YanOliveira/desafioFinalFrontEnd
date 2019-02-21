@@ -9,16 +9,12 @@ import { Container } from './styles';
 import Header from '../../components/Header';
 
 class Dashboard extends Component {
-  static propTypes = {
-    getSessionsRequest: PropTypes.func.isRequired,
-    history: PropTypes.shape.isRequired,
-  };
+  static propTypes = {};
 
   state = {};
 
   componentDidMount() {
-    const { getSessionsRequest, history } = this.props;
-    getSessionsRequest(history);
+    console.tron.log(this.props);
   }
 
   render() {

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
+import { colors } from './defaults';
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -15,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     font-family: 'Helvetica', sans-serif;
+    background: ${colors.secondary};
   }
   ul{
     list-style: none;

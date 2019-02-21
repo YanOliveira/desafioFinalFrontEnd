@@ -27,9 +27,7 @@ export default function users(state = INITIAL_STATE, action) {
       toast.success('Usuário criado com sucesso, já pode fazer login !', { autoClose: 3000 });
       return { ...state, loading: true, error: null };
     case Types.ADD_FAILURE:
-      action.payload.errors.map((error) => {
-        toast.error(error.message, { autoClose: 3000 });
-      });
+      action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: true, error: null };
     default:
       return { ...state, loading: false };

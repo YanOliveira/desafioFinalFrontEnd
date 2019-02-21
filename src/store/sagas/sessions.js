@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import api from '../../services/api';
-import { login, logout } from '../../services/auth';
+import { login, logout, load } from '../../services/auth';
 
 import { creators as sessionsActions } from '../ducks/sessions';
 
@@ -8,6 +8,19 @@ export function* createSession(action) {
   try {
     const { data } = yield call(api.post, 'sessions', action.payload.user);
     yield login(data.token);
+    const {
+      data: {
+        id, name, email, technologies,
+      },
+    } = yield call(api.get, 'users');
+    const user = {
+      id,
+      name,
+      email,
+      technologies,
+    };
+    yield load(user);
+
     yield put(sessionsActions.createSessionSuccess(action.payload.history));
   } catch (error) {
     yield put(sessionsActions.createSessionFailure('Usuário ou senha incorretos.'));

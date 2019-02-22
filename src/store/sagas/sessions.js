@@ -1,29 +1,24 @@
-import { call, put } from 'redux-saga/effects';
-import api from '../../services/api';
-import { login, logout, load } from '../../services/auth';
+import { call, put } from "redux-saga/effects";
+import api from "../../services/api";
+import { login, logout, load } from "../../services/auth";
 
-import { creators as sessionsActions } from '../ducks/sessions';
+import { creators as sessionsActions } from "../ducks/sessions";
 
 export function* createSession(action) {
   try {
-    const { data } = yield call(api.post, 'sessions', action.payload.user);
+    const { data } = yield call(api.post, "sessions", action.payload.user);
     yield login(data.token);
     const {
-      data: {
-        id, name, email, technologies,
-      },
-    } = yield call(api.get, 'users');
-    const user = {
-      id,
-      name,
-      email,
-      technologies,
-    };
-    yield load(user);
+      data: { technologies }
+    } = yield call(api.get, "users");
+    const firstLogin = technologies.length === 0;
+    yield load(firstLogin);
 
     yield put(sessionsActions.createSessionSuccess(action.payload.history));
   } catch (error) {
-    yield put(sessionsActions.createSessionFailure('Usuário ou senha incorretos.'));
+    yield put(
+      sessionsActions.createSessionFailure("Usuário ou senha incorretos.")
+    );
   }
 }
 
@@ -32,6 +27,6 @@ export function* destroySession(action) {
     yield logout();
     yield put(sessionsActions.destroySessionSuccess(action.payload.history));
   } catch (error) {
-    yield put(sessionsActions.destroySessionFailure('Algo não deu certo.'));
+    yield put(sessionsActions.destroySessionFailure("Algo não deu certo."));
   }
 }

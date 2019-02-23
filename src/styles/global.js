@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     font-family: 'Helvetica', sans-serif;
     background: ${colors.secondary};
+    color: ${colors.white};
   }
   ul{
     list-style: none;

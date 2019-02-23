@@ -1,17 +1,26 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthenticated } from '../services/auth';
+import PropTypes from 'prop-types';
+import { isAuthenticated, checkFirstLogin } from '../services/auth';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (isAuthenticated() ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
-    ))
-    }
-  />
-);
+const PrivateRoute = ({ component, ...rest }) => {
+  const Component = checkFirstLogin(component);
+  return (
+    <Route
+      {...rest}
+      render={props => (isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
+      ))
+      }
+    />
+  );
+};
+
+PrivateRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  location: PropTypes.shape().isRequired,
+};
 
 export default PrivateRoute;

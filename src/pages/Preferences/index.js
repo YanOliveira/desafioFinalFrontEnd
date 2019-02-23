@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Container } from './styles';
 
-class preferences extends Component {
+class Preferences extends Component {
   render() {
     return (
       <Container>
@@ -20,6 +20,6 @@ class preferences extends Component {
 // const mapDispatchToProps = dispatch =>
 //   bindActionCreators(Actions, dispatch);
 
-export default connect()(preferences);
+export default connect()(Preferences);
 // mapStateToProps,
 // mapDispatchToProps

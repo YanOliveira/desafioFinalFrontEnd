@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import api from '../../services/api';
-import { setFirstLogin } from '../../services/localStorage';
+import { setFirstLogin, getUser, setUser } from '../../services/localStorage';
 
 import { creators as usersActions } from '../ducks/users';
 
@@ -17,6 +17,9 @@ export function* updateUser(action) {
   try {
     yield call(api.put, 'users', action.payload.user);
     yield setFirstLogin('false');
+    let user = yield JSON.parse(getUser());
+    user = { ...user, technologies: action.payload.user.technologies };
+    setUser(user);
     yield put(usersActions.updateUserSuccess(action.payload.user, action.payload.history));
   } catch (error) {
     yield put(usersActions.updateUserFailure(error.response.data));

@@ -5,15 +5,13 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { getTechnologies } from '../../services/localStorage';
+
 import { Container, Checkboxes, Option } from './styles';
 import { creators as UsersActions } from '../../store/ducks/users';
 
 class Preferences extends Component {
-  static propTypes = {
-    technologies: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }).isRequired,
+  static propTypes = {    
     updateUserRequest: PropTypes.func.isRequired,
     history: PropTypes.func.isRequired,
   };
@@ -40,7 +38,7 @@ class Preferences extends Component {
   };
 
   render() {
-    const { technologies } = this.props;
+    const technologies = JSON.parse(getTechnologies());
     return (
       <Container>
         <strong>Olá, Yan</strong>
@@ -74,13 +72,11 @@ class Preferences extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  technologies: state.technologies.technologies,
-});
+// const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => bindActionCreators(UsersActions, dispatch);
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(withRouter(Preferences));

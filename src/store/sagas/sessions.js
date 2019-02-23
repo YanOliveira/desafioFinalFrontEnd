@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import api from '../../services/api';
-import { login, logout, setFirstLogin } from '../../services/auth';
+import { login, logout } from '../../services/auth';
+import { setFirstLogin } from '../../services/localStorage';
 
 import { creators as sessionsActions } from '../ducks/sessions';
 import { creators as technologiesActions } from '../ducks/technologies';

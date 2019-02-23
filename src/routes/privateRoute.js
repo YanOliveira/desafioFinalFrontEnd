@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { isAuthenticated, checkFirstLogin } from '../services/auth';
+import { isAuthenticated } from '../services/auth';
+import { checkFirstLogin } from '../services/localStorage';
 
 const PrivateRoute = ({ component, ...rest }) => {
   const Component = checkFirstLogin(component);

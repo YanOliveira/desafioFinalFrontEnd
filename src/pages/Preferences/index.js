@@ -1,52 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { Container, Checkboxes, Option } from './styles';
+import { creators as UsersActions } from '../../store/ducks/users';
 
-class Preferences extends Component {
-  checkBox = () => {};
+const Preferences = ({ technologies, ...props }) => (
+  <Container>
+    <strong>Olá, Yan</strong>
+    <p>
+      Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para
+      selecionarmos os melhores meetups pra você:
+    </p>
 
-  render() {
-    return (
-      <Container>
-        <strong>Olá, Yan</strong>
-        <p>
-          Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para
-          selecionarmos os melhores meetups pra você:
-        </p>
+    <form onSubmit={() => {}}>
+      <Checkboxes>
+        <legend>Preferências</legend>
+        {technologies.map(technology => (
+          <Option key={technology.id}>
+            <input type="checkbox" name="technologies" id={technology.id} value={technology.id} />
+            <label htmlFor={technology.id}>
+              <span />
+              {technology.name}
+            </label>
+          </Option>
+        ))}
+      </Checkboxes>
+      <button type="submit">Continuar</button>
+    </form>
+  </Container>
+);
 
-        <form>
-          <Checkboxes>
-            <legend>Preferências</legend>
-            <Option>
-              <input type="checkbox" name="favorite_pet" id="cat1" value="Cat1" />
-              <label htmlFor="cat1">
-                <span />
-                Cat 1
-              </label>
-            </Option>
-            <Option>
-              <input type="checkbox" name="favorite_pet" id="cat2" value="Cat2" />
-              <label htmlFor="cat2">
-                <span />
-                Cat 1
-              </label>
-            </Option>
-          </Checkboxes>
-          <button type="submit">Continuar</button>
-        </form>
-      </Container>
-    );
-  }
-}
+Preferences.propTypes = {
+  technologies: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+  // updateUserRequest: PropTypes.func.isRequired,
+};
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  technologies: state.technologies.technologies,
+});
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(UsersActions, dispatch);
 
-export default connect()(Preferences);
-// mapStateToProps,
-// mapDispatchToProps
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Preferences);

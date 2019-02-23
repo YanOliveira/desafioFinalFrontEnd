@@ -22,6 +22,6 @@ export const logout = () => {
   localStorage.removeItem(FIRSTLOGIN_KEY);
 };
 
-export const load = (firstLogin) => {
+export const setFirstLogin = (firstLogin) => {
   localStorage.setItem(FIRSTLOGIN_KEY, firstLogin);
 };

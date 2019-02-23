@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import api from '../../services/api';
-import { login, logout, load } from '../../services/auth';
+import { login, logout, setFirstLogin } from '../../services/auth';
 
 import { creators as sessionsActions } from '../ducks/sessions';
 import { creators as technologiesActions } from '../ducks/technologies';
@@ -13,7 +13,7 @@ export function* createSession(action) {
       data: { technologies },
     } = yield call(api.get, 'users');
     const firstLogin = technologies.length === 0;
-    yield load(firstLogin);
+    yield setFirstLogin(firstLogin);
 
     yield put(sessionsActions.createSessionSuccess(action.payload.history));
     yield put(technologiesActions.getTechnologiesRequest());

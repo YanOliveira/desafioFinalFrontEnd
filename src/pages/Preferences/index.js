@@ -5,13 +5,13 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getTechnologies } from '../../services/localStorage';
+import { getTechnologies, getUser } from '../../services/localStorage';
 
 import { Container, Checkboxes, Option } from './styles';
 import { creators as UsersActions } from '../../store/ducks/users';
 
 class Preferences extends Component {
-  static propTypes = {    
+  static propTypes = {
     updateUserRequest: PropTypes.func.isRequired,
     history: PropTypes.func.isRequired,
   };
@@ -39,9 +39,10 @@ class Preferences extends Component {
 
   render() {
     const technologies = JSON.parse(getTechnologies());
+    const { name } = JSON.parse(getUser());
     return (
       <Container>
-        <strong>Olá, Yan</strong>
+        <strong>Olá, {name}</strong>
         <p>
           Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para
           selecionarmos os melhores meetups pra você:

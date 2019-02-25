@@ -1,31 +1,29 @@
-import { call, put } from 'redux-saga/effects';
-import api from '../../services/api';
-import { login, logout } from '../../services/auth';
-import { setFirstLogin, setUser, setTechnologies } from '../../services/localStorage';
+import { call, put } from "redux-saga/effects";
+import api from "../../services/api";
+import { login, logout } from "../../services/auth";
+import { setUser, setTechnologies } from "../../services/localStorage";
 
-import { creators as sessionsActions } from '../ducks/sessions';
+import { creators as sessionsActions } from "../ducks/sessions";
 
 export function* createSession(action) {
   try {
+    const { data } = yield call(api.post, "sessions", action.payload.user);
+    yield login(data.token);
+
     const {
-      data: { token },
-    } = yield call(api.post, 'sessions', action.payload.user);
-    yield login(token);
-    const { data } = yield call(api.get, 'users');
-    const firstLogin = data.technologies.length === 0;
-    yield setFirstLogin(firstLogin);
-    const user = {
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      technologies: data.technologies,
-    };
+      data: { id, name, email, technologies }
+    } = yield call(api.get, "users");
+    const user = { id, name, email, technologies };
     yield setUser(user);
-    const { data: technologies } = yield call(api.get, 'technologies');
-    setTechnologies(technologies);
+
+    const { data: allTechnologies } = yield call(api.get, "technologies");
+    setTechnologies(allTechnologies);
+
     yield put(sessionsActions.createSessionSuccess(action.payload.history));
   } catch (error) {
-    yield put(sessionsActions.createSessionFailure('Usuário ou senha incorretos.'));
+    yield put(
+      sessionsActions.createSessionFailure("Usuário ou senha incorretos.")
+    );
   }
 }
 
@@ -34,6 +32,6 @@ export function* destroySession(action) {
     yield logout();
     yield put(sessionsActions.destroySessionSuccess(action.payload.history));
   } catch (error) {
-    yield put(sessionsActions.destroySessionFailure('Algo não deu certo.'));
+    yield put(sessionsActions.destroySessionFailure("Algo não deu certo."));
   }
 }

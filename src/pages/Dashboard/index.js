@@ -8,6 +8,7 @@ import { creators as UsersActions } from "../../store/ducks/users";
 
 import { Container, Content } from "./styles";
 import Header from "../../components/Header";
+import MeetupList from "../../components/MeetupList";
 
 class Dashboard extends Component {
   static propTypes = {};
@@ -19,7 +20,7 @@ class Dashboard extends Component {
       <Container>
         <Header />
         <Content>
-          <h1>teste</h1>
+          <MeetupList />
         </Content>
       </Container>
     );

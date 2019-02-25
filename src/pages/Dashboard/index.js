@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import { creators as SessionsActions } from "../../store/ducks/sessions";
 import { creators as UsersActions } from "../../store/ducks/users";
 
-import { Container } from "./styles";
+import { Container, Content } from "./styles";
 import Header from "../../components/Header";
 
 class Dashboard extends Component {
@@ -18,6 +18,9 @@ class Dashboard extends Component {
     return (
       <Container>
         <Header />
+        <Content>
+          <h1>teste</h1>
+        </Content>
       </Container>
     );
   }

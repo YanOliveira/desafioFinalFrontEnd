@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { colors, fonts } from '../../styles/defaults';
+import styled from "styled-components";
+import { colors, fonts } from "../../styles/defaults";
 
 export const Container = styled.div`
   background: ${colors.primary};
@@ -47,7 +47,7 @@ export const Profile = styled.div`
     font-size: ${fonts.regular};
     display: none;
     position: absolute;
-    margin-top: 64px;
+    padding-top: 170px;
     ul {
       border: 1px solid ${colors.darker};
       background: ${colors.secondary};

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import { Container, Button, Info } from './styles';
+import { Container, Button, Info } from "./styles";
 
 const MeetupItem = () => (
   <Container>

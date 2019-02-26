@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
+import Meetup from "../pages/Meetup";
 
 const Routes = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = () => (
       <Switch>
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/meetups" component={Meetup} />
         <WithoutAuthenticationRoute path="/signin" component={SignIn} />
         <WithoutAuthenticationRoute path="/signup" component={SignUp} />
       </Switch>

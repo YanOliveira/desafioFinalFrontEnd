@@ -19,7 +19,11 @@ export function* updateUser(action) {
   try {
     yield call(api.put, "users", action.payload.user);
     let user = yield JSON.parse(getUser());
-    user = { ...user, technologies: action.payload.user.technologies };
+    user = {
+      ...user,
+      name: action.payload.user.name ? action.payload.user.name : user.name,
+      technologies: action.payload.user.technologies
+    };
     setUser(user);
     yield put(
       usersActions.updateUserSuccess(

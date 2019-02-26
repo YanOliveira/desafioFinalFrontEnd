@@ -41,6 +41,10 @@ export const Form = styled.form`
     padding: 10px;
     font-size: ${fonts.large};
     color: ${colors.lighter};
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
+      -webkit-text-fill-color: ${colors.white} !important;
+    }
   }
 
   button {

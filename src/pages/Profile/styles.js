@@ -2,32 +2,43 @@ import styled from "styled-components";
 import { colors, fonts } from "../../styles/defaults";
 
 export const Container = styled.div`
-  width: 315px;
-  height: 100%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  strong {
-    font-size: ${fonts.larger};
-  }
-  p {
-    margin: 20px 0;
-    font-size: ${fonts.regular};
-    opacity: 0.8;
-  }
-  button {
-    margin: 20px 0;
-    width: 300px;
-    height: 50px;
-    border-radius: 30px;
-    font-size: ${fonts.regular};
-    color: ${colors.lighter};
-    background: ${colors.primary};
-    font-weight: bold;
-    &:hover {
-      cursor: pointer;
-      opacity: 0.9;
+  form {
+    width: 315px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    label {
+      font-size: ${fonts.regular};
+      color: ${colors.white};
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    input {
+      background: transparent;
+      width: 300px;
+      margin: 10px 0;
+      font-size: ${fonts.large};
+      color: ${colors.lighter};
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
+        -webkit-text-fill-color: ${colors.white} !important;
+      }
+    }
+    button {
+      margin: 20px 0;
+      width: 300px;
+      height: 50px;
+      border-radius: 30px;
+      font-size: ${fonts.regular};
+      color: ${colors.lighter};
+      background: ${colors.primary};
+      font-weight: bold;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
     }
   }
 `;
@@ -49,7 +60,6 @@ export const Option = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 12px 0;
   input[type="checkbox"] {
     display: none;
   }

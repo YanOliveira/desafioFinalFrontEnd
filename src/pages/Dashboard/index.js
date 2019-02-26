@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { creators as SessionsActions } from "../../store/ducks/sessions";
-import { creators as UsersActions } from "../../store/ducks/users";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { creators as SessionsActions } from '../../store/ducks/sessions';
+import { creators as UsersActions } from '../../store/ducks/users';
 
-import { Container, Content } from "./styles";
-import Header from "../../components/Header";
-import MeetupList from "../../components/MeetupList";
+import { Container, Content } from './styles';
+import Header from '../../components/Header';
+import MeetupList from '../../components/MeetupList';
 
 class Dashboard extends Component {
   static propTypes = {};
@@ -20,6 +20,8 @@ class Dashboard extends Component {
       <Container>
         <Header />
         <Content>
+          <MeetupList />
+          <MeetupList />
           <MeetupList />
         </Content>
       </Container>

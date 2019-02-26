@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { colors } from "../../styles/defaults";
+import styled from 'styled-components';
+import { colors } from '../../styles/defaults';
 
 export const Container = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

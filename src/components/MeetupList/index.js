@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { Container } from "./styles";
-import MeetupItem from "./MeetupItem";
+import { Container } from './styles';
+import MeetupItem from './MeetupItem';
 
 const MeetupList = () => (
   <Container>

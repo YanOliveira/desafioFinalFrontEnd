@@ -1,9 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { Container, Button, Info } from "./styles";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
+import { Container, Button, Info } from './styles';
 
 const MeetupItem = () => (
   <Container>
@@ -16,7 +19,9 @@ const MeetupItem = () => (
         <strong>Meetup ReactJS</strong>
         <span>120 Inscritos</span>
       </Info>
-      <Button>></Button>
+      <Button type="button">
+        <FontAwesomeIcon icon={faAngleRight} />
+      </Button>
     </div>
   </Container>
 );

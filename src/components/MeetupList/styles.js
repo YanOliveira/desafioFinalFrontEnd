@@ -1,11 +1,16 @@
-import styled from "styled-components";
-import { colors, fonts } from "../../styles/defaults";
+import styled from 'styled-components';
+import { fonts } from '../../styles/defaults';
 
 export const Container = styled.div`
   width: 900px;
   display: flex;
   flex-direction: column;
-  div {
+  margin: 20px 0;
+  > strong {
+    font-size: ${fonts.regular};
+    margin-bottom: 20px;
+  }
+  > div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

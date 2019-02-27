@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
-import 'react-toastify/dist/ReactToastify.css';
-import { colors } from './defaults';
+import { createGlobalStyle } from "styled-components";
+import "react-toastify/dist/ReactToastify.css";
+import { colors } from "./defaults";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -29,10 +29,11 @@ const GlobalStyle = createGlobalStyle`
   button{
     border: 0;
   }
-  input{
+  input, textarea{
     border:0;
     outline: none;
   }
+
 `;
 
 export default GlobalStyle;

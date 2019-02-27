@@ -8,6 +8,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import Meetup from "../pages/Meetup";
+import NewMeetup from "../pages/NewMeetup";
 
 const Routes = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const Routes = () => (
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/meetups" component={Meetup} />
+        <PrivateRoute path="/newmeetup" component={NewMeetup} />
         <WithoutAuthenticationRoute path="/signin" component={SignIn} />
         <WithoutAuthenticationRoute path="/signup" component={SignUp} />
       </Switch>

@@ -29,13 +29,13 @@ const Header = props => (
       <img src={LogoIcon} alt="Meetups App" />
       <ul>
         <li>
-          <a href="/">Início</a>
+          <Link to="/">Início</Link>
         </li>
         <li>
-          <a href="/">Buscar</a>
+          <Link to="/search">Buscar</Link>
         </li>
         <li>
-          <a href="/">Novo meetup</a>
+          <Link to="/newmeetup">Novo meetup</Link>
         </li>
       </ul>
     </Nav>

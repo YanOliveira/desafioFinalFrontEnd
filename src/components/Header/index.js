@@ -28,15 +28,15 @@ const Header = props => (
     <Nav>
       <img src={LogoIcon} alt="Meetups App" />
       <ul>
-        <li>
-          <Link to="/">Início</Link>
-        </li>
-        <li>
-          <Link to="/search">Buscar</Link>
-        </li>
-        <li>
-          <Link to="/newmeetup">Novo meetup</Link>
-        </li>
+        <Link to="/">
+          <li>Início</li>
+        </Link>
+        <Link to="/search">
+          <li>Buscar</li>
+        </Link>
+        <Link to="/newmeetup">
+          <li>Novo meetup</li>
+        </Link>
       </ul>
     </Nav>
     <Profile>

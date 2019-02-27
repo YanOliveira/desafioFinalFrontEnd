@@ -20,13 +20,13 @@ export const Nav = styled.div`
     margin-right: 20px;
   }
   ul {
+    a {
+      font-size: ${fonts.regular};
+      color: ${colors.white};
+      font-weight: bold;
+    }
     li {
       padding: 15px;
-      a {
-        font-size: ${fonts.regular};
-        color: ${colors.white};
-        font-weight: bold;
-      }
       &:hover {
         cursor: pointer;
         opacity: 0.5;

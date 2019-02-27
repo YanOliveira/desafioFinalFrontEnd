@@ -4,9 +4,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-// import { Container } from "./styles";
 import { Checkboxes, Option, Form, Button } from "../../styles/components";
 import Header from "../../components/Header";
+import { updateCheckedBoxes } from "../../helpers/functions";
 import { getTechnologies, getUser } from "../../services/localStorage";
 import { creators as UsersActions } from "../../store/ducks/users";
 
@@ -25,7 +25,15 @@ class Profile extends Component {
 
   componentDidMount() {
     const user = JSON.parse(getUser());
-    this.setState({ name: user.name, technologies: user.technologies });
+    user.technologies.map(item => {
+      this.setState({
+        technologies: updateCheckedBoxes(
+          this.state.technologies,
+          item.id.toString()
+        )
+      });
+    });
+    this.setState({ name: user.name });
   }
 
   handleUpdatePreferences = e => {
@@ -35,14 +43,9 @@ class Profile extends Component {
   };
 
   handleClickCheckbox = item => {
-    const checkeds = this.state.technologies;
-    const index = checkeds.indexOf(item);
-    if (index === -1) {
-      checkeds.push(item);
-    } else {
-      checkeds.splice(index, 1);
-    }
-    this.setState({ technologies: checkeds });
+    this.setState({
+      technologies: updateCheckedBoxes(this.state.technologies, item)
+    });
   };
   render() {
     const technologies = JSON.parse(getTechnologies());

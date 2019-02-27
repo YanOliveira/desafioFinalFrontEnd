@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { getTechnologies, getUser } from "../../services/localStorage";
+import { updateCheckedBoxes } from "../../helpers/functions";
 
 import { Container } from "./styles";
 import { Checkboxes, Option, Form, Button } from "../../styles/components";
@@ -28,14 +29,9 @@ class Preferences extends Component {
   };
 
   handleClickCheckbox = item => {
-    const checkeds = this.state.technologies;
-    const index = checkeds.indexOf(item);
-    if (index === -1) {
-      checkeds.push(item);
-    } else {
-      checkeds.splice(index, 1);
-    }
-    this.setState({ technologies: checkeds });
+    this.setState({
+      technologies: updateCheckedBoxes(this.state.technologies, item)
+    });
   };
 
   render() {

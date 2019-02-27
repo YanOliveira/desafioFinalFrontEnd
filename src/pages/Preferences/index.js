@@ -1,32 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { getTechnologies, getUser } from '../../services/localStorage';
+import { getTechnologies, getUser } from "../../services/localStorage";
 
-import { Container, Checkboxes, Option } from './styles';
-import { creators as UsersActions } from '../../store/ducks/users';
+import { Container } from "./styles";
+import { Checkboxes, Option, Form, Button } from "../../styles/components";
+import { creators as UsersActions } from "../../store/ducks/users";
 
 class Preferences extends Component {
   static propTypes = {
     updateUserRequest: PropTypes.func.isRequired,
-    history: PropTypes.func.isRequired,
+    history: PropTypes.func.isRequired
   };
 
   state = {
-    technologies: [],
+    technologies: []
   };
 
-  handleUpdatePreferences = (e) => {
+  handleUpdatePreferences = e => {
     e.preventDefault();
     const { updateUserRequest, history } = this.props;
     updateUserRequest(this.state, history);
   };
 
-  handleClickCheckbox = (item) => {
+  handleClickCheckbox = item => {
     const checkeds = this.state.technologies;
     const index = checkeds.indexOf(item);
     if (index === -1) {
@@ -44,11 +45,11 @@ class Preferences extends Component {
       <Container>
         <strong>Olá, {name}</strong>
         <p>
-          Parece que é seu primeiro acesso por aqui, comece escolhendo algumas preferências para
-          selecionarmos os melhores meetups pra você:
+          Parece que é seu primeiro acesso por aqui, comece escolhendo algumas
+          preferências para selecionarmos os melhores meetups pra você:
         </p>
 
-        <form onSubmit={this.handleUpdatePreferences}>
+        <Form onSubmit={this.handleUpdatePreferences}>
           <Checkboxes onChange={e => this.handleClickCheckbox(e.target.value)}>
             <legend>Preferências</legend>
             {technologies.map(technology => (
@@ -66,8 +67,8 @@ class Preferences extends Component {
               </Option>
             ))}
           </Checkboxes>
-          <button type="submit">Continuar</button>
-        </form>
+          <Button type="submit">Continuar</Button>
+        </Form>
       </Container>
     );
   }
@@ -75,9 +76,10 @@ class Preferences extends Component {
 
 // const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators(UsersActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(UsersActions, dispatch);
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(withRouter(Preferences));

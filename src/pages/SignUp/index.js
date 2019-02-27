@@ -1,28 +1,29 @@
-import React, { Component, Fragment } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import { Container, Content, Form } from './styles';
-import LogoIcon from '../../assets/images/logo.svg';
+import { Container, Content } from "./styles";
+import { Button, Form } from "../../styles/components";
+import LogoIcon from "../../assets/images/logo.svg";
 
-import { creators as usersActions } from '../../store/ducks/users';
+import { creators as usersActions } from "../../store/ducks/users";
 
 class SignUp extends Component {
   state = {
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: ""
   };
 
   static propTypes = {
     addUserRequest: PropTypes.func.isRequired,
-    history: PropTypes.func.isRequired,
+    history: PropTypes.func.isRequired
   };
 
-  handleSignUp = (e) => {
+  handleSignUp = e => {
     const { addUserRequest, history } = this.props;
     e.preventDefault();
     addUserRequest(this.state, history);
@@ -35,7 +36,7 @@ class SignUp extends Component {
           <Content>
             <img src={LogoIcon} alt="Meetups App" />
             <Form onSubmit={this.handleSignUp}>
-              <span>Nome</span>
+              <label>Nome</label>
               <input
                 type="text"
                 name="name"
@@ -43,7 +44,7 @@ class SignUp extends Component {
                 required
                 onChange={e => this.setState({ name: e.target.value })}
               />
-              <span>Email</span>
+              <label>Email</label>
               <input
                 type="email"
                 name="email"
@@ -51,7 +52,7 @@ class SignUp extends Component {
                 required
                 onChange={e => this.setState({ email: e.target.value })}
               />
-              <span>Senha</span>
+              <label>Senha</label>
               <input
                 type="password"
                 name="password"
@@ -59,15 +60,17 @@ class SignUp extends Component {
                 required
                 onChange={e => this.setState({ password: e.target.value })}
               />
-              <span>Confirme sua Senha</span>
+              <label>Confirme sua Senha</label>
               <input
                 type="password"
                 name="password_confirmation"
                 placeholder="Confirmação da sua senha"
                 required
-                onChange={e => this.setState({ password_confirmation: e.target.value })}
+                onChange={e =>
+                  this.setState({ password_confirmation: e.target.value })
+                }
               />
-              <button type="submit">Criar conta</button>
+              <Button type="submit">Criar conta</Button>
             </Form>
             <Link to="/signin">Já tenho conta</Link>
           </Content>
@@ -79,9 +82,10 @@ class SignUp extends Component {
 
 // const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators(usersActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(usersActions, dispatch);
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(withRouter(SignUp));

@@ -4,7 +4,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Container, Checkboxes, Option } from "./styles";
+// import { Container } from "./styles";
+import { Checkboxes, Option, Form, Button } from "../../styles/components";
 import Header from "../../components/Header";
 import { getTechnologies, getUser } from "../../services/localStorage";
 import { creators as UsersActions } from "../../store/ducks/users";
@@ -46,9 +47,9 @@ class Profile extends Component {
   render() {
     const technologies = JSON.parse(getTechnologies());
     return (
-      <Container>
+      <div>
         <Header />
-        <form onSubmit={this.handleUpdatePreferences}>
+        <Form onSubmit={this.handleUpdatePreferences}>
           <label>Nome</label>
           <input
             type="text"
@@ -93,9 +94,9 @@ class Profile extends Component {
               </Option>
             ))}
           </Checkboxes>
-          <button type="submit">Salvar</button>
-        </form>
-      </Container>
+          <Button type="submit">Salvar</Button>
+        </Form>
+      </div>
     );
   }
 }

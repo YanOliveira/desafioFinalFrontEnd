@@ -7,14 +7,14 @@ import { getTechnologies } from "../../services/localStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
-import { Container, Checkboxes, Option } from "./styles";
+import { Checkboxes, Option, Form, Button } from "../../styles/components";
 
 const technologies = JSON.parse(getTechnologies());
 
 const NewMeetup = () => (
-  <Container>
+  <div>
     <Header />
-    <form>
+    <Form>
       <label>Título</label>
       <input type="text" name="title" placeholder="Digite o título do meetup" />
       <label>Descrição</label>
@@ -52,9 +52,9 @@ const NewMeetup = () => (
           </Option>
         ))}
       </Checkboxes>
-      <button type="submit">Salvar</button>
-    </form>
-  </Container>
+      <Button type="submit">Salvar</Button>
+    </Form>
+  </div>
 );
 
 // const mapStateToProps = state => ({});

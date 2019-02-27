@@ -29,7 +29,7 @@ class Profile extends Component {
       this.setState({
         technologies: updateCheckedBoxes(
           this.state.technologies,
-          item.id.toString()
+          item.toString()
         )
       });
     });

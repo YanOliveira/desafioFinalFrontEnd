@@ -18,8 +18,8 @@ class Profile extends Component {
 
   state = {
     name: "",
-    password: "",
-    password_confirmation: "",
+    new_password: "",
+    new_password_confirmation: "",
     technologies: []
   };
 
@@ -29,7 +29,7 @@ class Profile extends Component {
       this.setState({
         technologies: updateCheckedBoxes(
           this.state.technologies,
-          item.toString()
+          !!item.id ? item.id.toString() : item.toString()
         )
       });
     });
@@ -63,17 +63,17 @@ class Profile extends Component {
           <label>Senha</label>
           <input
             type="password"
-            name="password"
+            name="new_password"
             placeholder="Sua senha secreta"
-            onChange={e => this.setState({ password: e.target.value })}
+            onChange={e => this.setState({ new_password: e.target.value })}
           />
           <label>Confirmação de senha</label>
           <input
             type="password"
-            name="password_confirmation"
+            name="new_password_confirmation"
             placeholder="Sua senha secreta"
             onChange={e =>
-              this.setState({ password_confirmation: e.target.value })
+              this.setState({ new_password_confirmation: e.target.value })
             }
           />
 

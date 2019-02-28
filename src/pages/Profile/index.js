@@ -60,6 +60,7 @@ class Profile extends Component {
             name="name"
             value={this.state.name}
             onChange={e => this.setState({ name: e.target.value })}
+            required
           />
           <label>Senha</label>
           <input
@@ -67,6 +68,7 @@ class Profile extends Component {
             name="new_password"
             placeholder="Sua senha secreta"
             onChange={e => this.setState({ new_password: e.target.value })}
+            required
           />
           <label>Confirmação de senha</label>
           <input
@@ -76,6 +78,7 @@ class Profile extends Component {
             onChange={e =>
               this.setState({ new_password_confirmation: e.target.value })
             }
+            required
           />
 
           <Checkboxes onChange={e => this.handleClickCheckbox(e.target.value)}>

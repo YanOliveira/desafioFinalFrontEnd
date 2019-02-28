@@ -7,6 +7,7 @@ import { creators as SessionsActions } from "../../store/ducks/sessions";
 import { Container, Content } from "./styles";
 import { Button, Form } from "../../styles/components";
 import LogoIcon from "../../assets/images/logo.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class SignIn extends Component {
   state = {
@@ -47,7 +48,13 @@ class SignIn extends Component {
               required
               onChange={e => this.setState({ password: e.target.value })}
             />
-            <Button type="submit">Entrar</Button>
+            <Button type="submit">
+              {!!this.props.loading ? (
+                <FontAwesomeIcon icon="spinner" pulse size="2x" />
+              ) : (
+                "Entrar"
+              )}
+            </Button>
           </Form>
           <Link to="/signup">Criar conta grátis</Link>
         </Content>
@@ -56,12 +63,14 @@ class SignIn extends Component {
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  loading: state.sessions.loading
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(SessionsActions, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(SignIn));

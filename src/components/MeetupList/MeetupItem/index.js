@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 import { Container, Button, Info } from "./styles";
 
@@ -20,7 +19,7 @@ const MeetupItem = () => (
         <span>120 Inscritos</span>
       </Info>
       <Button type="button">
-        <FontAwesomeIcon icon={faAngleRight} />
+        <FontAwesomeIcon icon="angle-right" />
       </Button>
     </div>
   </Container>

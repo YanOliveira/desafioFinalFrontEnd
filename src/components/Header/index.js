@@ -6,11 +6,6 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faEdit,
-  faWindowClose
-} from "@fortawesome/free-regular-svg-icons";
 import { Container, Nav, Profile } from "./styles";
 import { creators as SessionsActions } from "../../store/ducks/sessions";
 import LogoIcon from "../../assets/images/logo-white.svg";
@@ -40,17 +35,17 @@ const Header = props => (
       </ul>
     </Nav>
     <Profile>
-      <FontAwesomeIcon className="iconHeader" icon={faUser} />
+      <FontAwesomeIcon className="iconHeader" icon="user" />
       <div>
         <ul>
           <Link to="/profile">
             <li>
-              <FontAwesomeIcon className="icon" icon={faEdit} />
+              <FontAwesomeIcon className="icon" icon="edit" />
               Perfil
             </li>
           </Link>
           <li onClick={() => handleLogout(props)}>
-            <FontAwesomeIcon className="icon" icon={faWindowClose} />
+            <FontAwesomeIcon className="icon" icon="window-close" />
             Sair
           </li>
         </ul>

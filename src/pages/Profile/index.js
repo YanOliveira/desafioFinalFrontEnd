@@ -9,6 +9,7 @@ import Header from "../../components/Header";
 import { updateCheckedBoxes } from "../../helpers/functions";
 import { getTechnologies, getUser } from "../../services/localStorage";
 import { creators as UsersActions } from "../../store/ducks/users";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Profile extends Component {
   static propTypes = {
@@ -97,20 +98,26 @@ class Profile extends Component {
               </Option>
             ))}
           </Checkboxes>
-          <Button type="submit">Salvar</Button>
+          <Button type="submit">
+            {!!this.props.loading ? (
+              <FontAwesomeIcon icon="spinner" pulse size="2x" />
+            ) : (
+              "Salvar"
+            )}
+          </Button>
         </Form>
       </div>
     );
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  loading: state.users.loading
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(UsersActions, dispatch);
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Profile);
-// mapStateToProps,
-// mapDispatchToProps

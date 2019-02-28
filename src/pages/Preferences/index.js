@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 
 import { getTechnologies, getUser } from "../../services/localStorage";
 import { updateCheckedBoxes } from "../../helpers/functions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Container } from "./styles";
 import { Checkboxes, Option, Form, Button } from "../../styles/components";
@@ -63,19 +64,27 @@ class Preferences extends Component {
               </Option>
             ))}
           </Checkboxes>
-          <Button type="submit">Continuar</Button>
+          <Button type="submit">
+            {!!this.props.loading ? (
+              <FontAwesomeIcon icon="spinner" pulse size="2x" />
+            ) : (
+              "Continuar"
+            )}
+          </Button>
         </Form>
       </Container>
     );
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  loading: state.users.loading
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(UsersActions, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(Preferences));

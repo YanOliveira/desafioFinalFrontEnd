@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import Header from "../../components/Header";
 import { getTechnologies } from "../../services/localStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { updateCheckedBoxes } from "../../helpers/functions";
+import { creators as MeetupsActions } from "../../store/ducks/meetups";
 
 import { Checkboxes, Option, Form, Button } from "../../styles/components";
 
@@ -59,7 +59,7 @@ class NewMeetup extends Component {
           />
           <label>Imagem</label>
           <span className="fileUpdate">
-            <FontAwesomeIcon className="icon" icon={faCamera} />
+            <FontAwesomeIcon className="icon" icon="camera" />
           </span>
           <input type="file" name="file_id" required />
           <label>Localização</label>
@@ -86,18 +86,27 @@ class NewMeetup extends Component {
               </Option>
             ))}
           </Checkboxes>
-          <Button type="submit">Salvar</Button>
+          <Button type="submit">
+            {!!this.props.loading ? (
+              <FontAwesomeIcon icon="spinner" pulse size="2x" />
+            ) : (
+              "Salvar"
+            )}
+          </Button>
         </Form>
       </div>
     );
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  loading: state.meetups.loading
+});
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(MeetupsActions, dispatch);
 
-export default connect()(NewMeetup);
-// mapStateToProps,
-// mapDispatchToProps
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewMeetup);

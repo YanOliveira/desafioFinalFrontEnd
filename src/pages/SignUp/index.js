@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { Container, Content } from "./styles";
 import { Button, Form } from "../../styles/components";
 import LogoIcon from "../../assets/images/logo.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { creators as usersActions } from "../../store/ducks/users";
 
@@ -70,7 +71,13 @@ class SignUp extends Component {
                   this.setState({ password_confirmation: e.target.value })
                 }
               />
-              <Button type="submit">Criar conta</Button>
+              <Button type="submit">
+                {!!this.props.loading ? (
+                  <FontAwesomeIcon icon="spinner" pulse size="2x" />
+                ) : (
+                  "Entrar"
+                )}
+              </Button>
             </Form>
             <Link to="/signin">Já tenho conta</Link>
           </Content>
@@ -80,12 +87,14 @@ class SignUp extends Component {
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  loading: state.users.loading
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(usersActions, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(SignUp));

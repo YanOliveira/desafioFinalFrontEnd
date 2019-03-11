@@ -7,3 +7,7 @@ import { creators as usersActions } from "../ducks/users";
 export function* showMeetup(action) {
   console.tron.log("teste" + action);
 }
+
+export function* uploadFile(action) {
+  console.tron.log(action.payload.file);
+}

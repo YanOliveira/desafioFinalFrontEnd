@@ -9,7 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { updateCheckedBoxes } from "../../helpers/functions";
 import { creators as MeetupsActions } from "../../store/ducks/meetups";
 
-import { Checkboxes, Option, Form, Button } from "../../styles/components";
+import {
+  Checkboxes,
+  Option,
+  Form,
+  Button,
+  File
+} from "../../styles/components";
 
 class NewMeetup extends Component {
   // static propTypes = {
@@ -24,8 +30,8 @@ class NewMeetup extends Component {
     technologies: []
   };
 
-  handleUpdatePreferences = e => {
-    e.preventDefault();
+  handleCreateMeetup = e => {
+    // e.preventDefault();
     console.tron.log(this.state);
     // const { updateUserRequest, history } = this.props;
     // updateUserRequest(this.state, history);
@@ -37,18 +43,24 @@ class NewMeetup extends Component {
     });
   };
 
+  handleUploadFile = file => {
+    this.props.uploadRequest(file);
+  };
+
   render() {
     const technologies = JSON.parse(getTechnologies());
     return (
       <div>
         <Header />
-        <Form>
+        <Form onSubmit={this.handleCreateMeetup}>
           <label>Título</label>
           <input
             type="text"
             name="title"
             placeholder="Digite o título do meetup"
             required
+            autoFocus
+            onChange={e => this.setState({ title: e.target.value })}
           />
           <label>Descrição</label>
           <textarea
@@ -56,12 +68,20 @@ class NewMeetup extends Component {
             rows="5"
             placeholder="Descreva seu meetup"
             required
+            onChange={e => this.setState({ description: e.target.value })}
           />
           <label>Imagem</label>
-          <span className="fileUpdate">
-            <FontAwesomeIcon className="icon" icon="camera" />
-          </span>
-          <input type="file" name="file_id" required />
+          <File>
+            <span className="fileUpdate">
+              <FontAwesomeIcon className="icon" icon="camera" />
+            </span>
+            <input
+              type="file"
+              name="file_id"
+              required
+              onChange={e => this.handleUploadFile(e.target.value)}
+            />
+          </File>
           <label>Localização</label>
           <input
             type="text"

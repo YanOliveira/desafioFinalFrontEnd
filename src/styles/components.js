@@ -67,15 +67,38 @@ export const Form = styled.form`
       -webkit-box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
       -webkit-text-fill-color: ${colors.white} !important;
     }
+    &:invalid {
+      box-shadow: none;
+    }
   }
   textarea {
     resize: none;
     overflow: hidden;
   }
-  input[type="file"] {
-    display: none;
-  }
-  span.fileUpdate {
+  // input[type="file"] {
+  //   display: none;
+  // }
+  // span.fileUpdate {
+  //   width: 100%;
+  //   height: 80px;
+  //   margin-top: 10px;
+  //   background-color: transparent;
+  //   border: 1px dashed ${colors.regular};
+  //   border-radius: 5px;
+  //   color: #fff;
+  //   cursor: pointer;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   .icon {
+  //     color: ${colors.regular};
+  //     font-size: ${fonts.larger};
+  //   }
+  // }
+`;
+export const File = styled.div`
+  display: flex;
+  span {
     width: 100%;
     height: 80px;
     margin-top: 10px;
@@ -83,13 +106,21 @@ export const Form = styled.form`
     border: 1px dashed ${colors.regular};
     border-radius: 5px;
     color: #fff;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     .icon {
       color: ${colors.regular};
       font-size: ${fonts.larger};
+    }
+  }
+  input {
+    font-size: 65px;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    &:hover {
+      cursor: pointer;
     }
   }
 `;

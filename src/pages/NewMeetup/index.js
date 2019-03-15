@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Files from "react-files";
 import Header from "../../components/Header";
 import { getTechnologies } from "../../services/localStorage";
 import { updateCheckedBoxes } from "../../helpers/functions";

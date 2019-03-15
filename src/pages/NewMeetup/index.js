@@ -1,21 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import Header from "../../components/Header";
-import { getTechnologies } from "../../services/localStorage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { updateCheckedBoxes } from "../../helpers/functions";
-import { creators as MeetupsActions } from "../../store/ducks/meetups";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Header from '../../components/Header';
+import { getTechnologies } from '../../services/localStorage';
+import { updateCheckedBoxes } from '../../helpers/functions';
+import { creators as MeetupsActions } from '../../store/ducks/meetups';
 
 import {
-  Checkboxes,
-  Option,
-  Form,
-  Button,
-  File
-} from "../../styles/components";
+  Checkboxes, Option, Form, Button, File,
+} from '../../styles/components';
 
 class NewMeetup extends Component {
   // static propTypes = {
@@ -23,28 +19,28 @@ class NewMeetup extends Component {
   //   history: PropTypes.func.isRequired
   // };
   state = {
-    title: "",
-    description: "",
-    file_id: "",
-    localization: "",
-    technologies: []
+    title: '',
+    description: '',
+    file_id: '',
+    localization: '',
+    technologies: [],
   };
 
-  handleCreateMeetup = e => {
+  handleCreateMeetup = (e) => {
     // e.preventDefault();
     console.tron.log(this.state);
     // const { updateUserRequest, history } = this.props;
     // updateUserRequest(this.state, history);
   };
 
-  handleClickCheckbox = item => {
+  handleClickCheckbox = (item) => {
     this.setState({
-      technologies: updateCheckedBoxes(this.state.technologies, item)
+      technologies: updateCheckedBoxes(this.state.technologies, item),
     });
   };
 
-  handleUploadFile = file => {
-    this.props.uploadRequest(file);
+  handleUploadFile = async (files) => {
+    await this.props.uploadRequest(files);
   };
 
   render() {
@@ -75,12 +71,7 @@ class NewMeetup extends Component {
             <span className="fileUpdate">
               <FontAwesomeIcon className="icon" icon="camera" />
             </span>
-            <input
-              type="file"
-              name="file_id"
-              required
-              onChange={e => this.handleUploadFile(e.target.value)}
-            />
+            <input type="file" name="file_id" required onChange={this.handleUploadFile} />
           </File>
           <label>Localização</label>
           <input
@@ -107,11 +98,7 @@ class NewMeetup extends Component {
             ))}
           </Checkboxes>
           <Button type="submit">
-            {!!this.props.loading ? (
-              <FontAwesomeIcon icon="spinner" pulse size="2x" />
-            ) : (
-              "Salvar"
-            )}
+            {this.props.loading ? <FontAwesomeIcon icon="spinner" pulse size="2x" /> : 'Salvar'}
           </Button>
         </Form>
       </div>
@@ -120,13 +107,12 @@ class NewMeetup extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.meetups.loading
+  loading: state.meetups.loading,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(MeetupsActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(MeetupsActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(NewMeetup);

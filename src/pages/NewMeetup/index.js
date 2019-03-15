@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Header from '../../components/Header';
-import { getTechnologies } from '../../services/localStorage';
-import { updateCheckedBoxes } from '../../helpers/functions';
-import { creators as MeetupsActions } from '../../store/ducks/meetups';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Files from "react-files";
+import Header from "../../components/Header";
+import { getTechnologies } from "../../services/localStorage";
+import { updateCheckedBoxes } from "../../helpers/functions";
+import { creators as MeetupsActions } from "../../store/ducks/meetups";
 
 import {
-  Checkboxes, Option, Form, Button, File,
-} from '../../styles/components';
+  Checkboxes,
+  Option,
+  Form,
+  Button,
+  File
+} from "../../styles/components";
+import { uploadFile } from "../../store/sagas/meetups";
 
 class NewMeetup extends Component {
   // static propTypes = {
@@ -19,28 +26,24 @@ class NewMeetup extends Component {
   //   history: PropTypes.func.isRequired
   // };
   state = {
-    title: '',
-    description: '',
-    file_id: '',
-    localization: '',
-    technologies: [],
+    title: "",
+    description: "",
+    file_id: null,
+    localization: "",
+    technologies: []
+    // file: null
   };
 
-  handleCreateMeetup = (e) => {
-    // e.preventDefault();
-    console.tron.log(this.state);
-    // const { updateUserRequest, history } = this.props;
-    // updateUserRequest(this.state, history);
+  handleCreateMeetup = e => {
+    e.preventDefault();
+    const { uploadRequest, history } = this.props;
+    uploadRequest(this.state, history);
   };
 
-  handleClickCheckbox = (item) => {
+  handleClickCheckbox = item => {
     this.setState({
-      technologies: updateCheckedBoxes(this.state.technologies, item),
+      technologies: updateCheckedBoxes(this.state.technologies, item)
     });
-  };
-
-  handleUploadFile = async (files) => {
-    await this.props.uploadRequest(files);
   };
 
   render() {
@@ -71,13 +74,20 @@ class NewMeetup extends Component {
             <span className="fileUpdate">
               <FontAwesomeIcon className="icon" icon="camera" />
             </span>
-            <input type="file" name="file_id" required onChange={this.handleUploadFile} />
+            <input
+              type="file"
+              name="file"
+              accept="image/*"
+              required
+              onChange={e => this.setState({ file_id: e.target.files[0] })}
+            />
           </File>
           <label>Localização</label>
           <input
             type="text"
             name="localization"
             placeholder="Onde seu meetup irá acontecer?"
+            onChange={e => this.setState({ localization: e.target.value })}
             required
           />
           <Checkboxes onChange={e => this.handleClickCheckbox(e.target.value)}>
@@ -98,7 +108,11 @@ class NewMeetup extends Component {
             ))}
           </Checkboxes>
           <Button type="submit">
-            {this.props.loading ? <FontAwesomeIcon icon="spinner" pulse size="2x" /> : 'Salvar'}
+            {this.props.loading ? (
+              <FontAwesomeIcon icon="spinner" pulse size="2x" />
+            ) : (
+              "Salvar"
+            )}
           </Button>
         </Form>
       </div>
@@ -107,12 +121,13 @@ class NewMeetup extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.meetups.loading,
+  loading: state.meetups.loading
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(MeetupsActions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(MeetupsActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(NewMeetup);
+  mapDispatchToProps
+)(withRouter(NewMeetup));

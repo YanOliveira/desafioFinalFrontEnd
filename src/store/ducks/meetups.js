@@ -13,7 +13,6 @@ export const Types = {
   SHOW_FAILURE: "meetups/SHOW_FAILURE",
 
   UPLOAD_REQUEST: "meetups/UPLOAD_REQUEST",
-  UPLOAD_SUCCESS: "meetups/UPLOAD_SUCCESS",
   UPLOAD_FAILURE: "meetups/UPLOAD_FAILURE"
 };
 
@@ -54,9 +53,7 @@ export default function meetups(state = INITIAL_STATE, action) {
       return { ...state, loading: false };
 
     case Types.UPLOAD_REQUEST:
-      return { ...state, loading: false };
-    case Types.UPLOAD_SUCCESS:
-      return { ...state, loading: false, file_id: action.payload.id };
+      return { ...state, loading: true };
     case Types.UPLOAD_FAILURE:
       action.payload.errors.map(error =>
         toast.error(error.message, { autoClose: 3000 })
@@ -72,13 +69,13 @@ export default function meetups(state = INITIAL_STATE, action) {
  * ACTIONS
  */
 export const creators = {
-  addMeetupRequest: (user, history) => ({
+  addMeetupRequest: (meetup, history) => ({
     type: Types.ADD_REQUEST,
-    payload: { user, history }
+    payload: { meetup, history }
   }),
-  addMeetupSuccess: (user, history) => ({
+  addMeetupSuccess: (meetup, history) => ({
     type: Types.ADD_SUCCESS,
-    payload: { user, history }
+    payload: { meetup, history }
   }),
   addMeetupFailure: errors => ({
     type: Types.ADD_FAILURE,
@@ -98,13 +95,9 @@ export const creators = {
     payload: { errors }
   }),
 
-  uploadRequest: file => ({
+  uploadRequest: (meetup, history) => ({
     type: Types.UPLOAD_REQUEST,
-    payload: { file }
-  }),
-  uploadSuccess: id => ({
-    type: Types.UPLOAD_SUCCESS,
-    payload: { id }
+    payload: { meetup, history }
   }),
   uploadFailure: errors => ({
     type: Types.UPLOAD_FAILURE,

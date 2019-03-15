@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-import { Container } from './styles';
-import MeetupItem from './MeetupItem';
+import { Container } from "./styles";
+import MeetupItem from "./MeetupItem";
 
-const MeetupList = () => (
+const MeetupList = props => (
   <Container>
-    <strong>Inscrições</strong>
+    <strong>{props.title}</strong>
     <div>
       <MeetupItem />
       <MeetupItem />

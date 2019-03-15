@@ -17,7 +17,6 @@ import {
   Button,
   File
 } from "../../styles/components";
-import { uploadFile } from "../../store/sagas/meetups";
 
 class NewMeetup extends Component {
   static propTypes = {

@@ -20,10 +20,11 @@ import {
 import { uploadFile } from "../../store/sagas/meetups";
 
 class NewMeetup extends Component {
-  // static propTypes = {
-  //   updateUserRequest: PropTypes.func.isRequired,
-  //   history: PropTypes.func.isRequired
-  // };
+  static propTypes = {
+    uploadRequest: PropTypes.func.isRequired,
+    history: PropTypes.func.isRequired
+  };
+
   state = {
     title: "",
     description: "",

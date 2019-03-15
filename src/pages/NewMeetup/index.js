@@ -29,8 +29,8 @@ class NewMeetup extends Component {
     description: "",
     file_id: null,
     localization: "",
-    technologies: []
-    // file: null
+    technologies: [],
+    image_name: ""
   };
 
   handleCreateMeetup = e => {
@@ -71,14 +71,23 @@ class NewMeetup extends Component {
           <label>Imagem</label>
           <File>
             <span className="fileUpdate">
-              <FontAwesomeIcon className="icon" icon="camera" />
+              {this.state.image_name ? (
+                this.state.image_name.substr(12)
+              ) : (
+                <FontAwesomeIcon className="icon" icon="camera" />
+              )}
             </span>
             <input
               type="file"
               name="file"
               accept="image/*"
               required
-              onChange={e => this.setState({ file_id: e.target.files[0] })}
+              onChange={e =>
+                this.setState({
+                  file_id: e.target.files[0],
+                  image_name: e.target.value
+                })
+              }
             />
           </File>
           <label>Localização</label>

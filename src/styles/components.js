@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { colors, fonts } from './defaults';
+import styled from "styled-components";
+import { colors, fonts } from "./defaults";
 
 export const Checkboxes = styled.fieldset`
   font-size: ${fonts.medium};
@@ -18,7 +18,7 @@ export const Option = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     display: none;
   }
   label {
@@ -31,14 +31,14 @@ export const Option = styled.div`
       margin-right: 10px;
     }
   }
-  input[type='checkbox'] + label span {
+  input[type="checkbox"] + label span {
     display: inline-block;
     width: 20px;
     height: 20px;
     border-radius: 5px;
     background: ${colors.dark};
   }
-  input[type='checkbox']:checked + label span {
+  input[type="checkbox"]:checked + label span {
     background: ${colors.primary};
   }
 `;
@@ -105,7 +105,7 @@ export const File = styled.div`
     background-color: transparent;
     border: 1px dashed ${colors.regular};
     border-radius: 5px;
-    color: #fff;
+    color: ${colors.lighter};
     display: flex;
     align-items: center;
     justify-content: center;

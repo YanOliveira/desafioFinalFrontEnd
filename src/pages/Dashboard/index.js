@@ -15,9 +15,10 @@ class Dashboard extends Component {
     registeredPage: 1,
     notRegisteredPage: 1,
     recomendedPage: 1,
+    file: null,
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     const {
       loadRegisteredsRequest,
       loadNotRegisteredsRequest,
@@ -26,7 +27,7 @@ class Dashboard extends Component {
     loadRegisteredsRequest(this.state.registeredPage);
     loadNotRegisteredsRequest(this.state.notRegisteredPage);
     loadRecomendedsRequest(this.state.recomendedPage);
-  }
+  };
 
   render() {
     return (
@@ -34,7 +35,7 @@ class Dashboard extends Component {
         <Header />
         <Content>
           <MeetupList title="Incrições" meetups={this.props.registereds} />
-          <MeetupList title="Proximos" meetups={this.props.notRegistereds} />
+          <MeetupList title="Próximos" meetups={this.props.notRegistereds} />
           <MeetupList title="Recomendados" meetups={this.props.recomendeds} />
         </Content>
       </Container>
@@ -43,6 +44,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
+  state,
   registereds: state.subscriptions.registereds,
   notRegistereds: state.subscriptions.notRegistereds,
   recomendeds: state.subscriptions.recomendeds,

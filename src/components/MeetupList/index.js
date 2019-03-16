@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Container } from './styles';
@@ -9,19 +7,12 @@ import MeetupItem from './MeetupItem';
 const MeetupList = props => (
   <Container>
     <strong>{props.title}</strong>
-    {props.meetups.map(meetup => (
-      <div>
+    <div>
+      {props.meetups.map(meetup => (
         <MeetupItem meetup={meetup} />
-      </div>
-    ))}
+      ))}
+    </div>
   </Container>
 );
 
-// const mapStateToProps = state => ({});
-
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(Actions, dispatch);
-
 export default connect()(MeetupList);
-// mapStateToProps,
-// mapDispatchToProps

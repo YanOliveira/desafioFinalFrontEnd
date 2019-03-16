@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Container, Button, Info } from "./styles";
+import { Container, Button, Info } from './styles';
 
-const MeetupItem = () => (
+const MeetupItem = props => (
   <Container>
     <img
       src="https://brunomedeirosjj.com/wp-content/uploads/2017/09/treinamento-de-seo-online.png"
@@ -15,7 +15,7 @@ const MeetupItem = () => (
     />
     <div>
       <Info>
-        <strong>Meetup ReactJS</strong>
+        <strong>{props.meetup.title}</strong>
         <span>120 Inscritos</span>
       </Info>
       <Button type="button">

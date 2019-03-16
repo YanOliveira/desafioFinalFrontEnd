@@ -1,12 +1,20 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 /**
  * TYPES
  */
 export const Types = {
-  LOAD_REQUEST: "subscriptions/LOAD_REQUEST",
-  LOAD_SUCCESS: "subscriptions/LOAD_SUCCESS",
-  LOAD_FAILURE: "subscriptions/LOAD_FAILURE"
+  LOAD_REGISTEREDS_REQUEST: 'subscriptions/LOAD_REGISTEREDS_REQUEST',
+  LOAD_REGISTEREDS_SUCCESS: 'subscriptions/LOAD_REGISTEREDS_SUCCESS',
+  LOAD_REGISTEREDS_FAILURE: 'subscriptions/LOAD_REGISTEREDS_FAILURE',
+
+  LOAD_NOTREGISTEREDS_REQUEST: 'subscriptions/LOAD_NOTREGISTEREDS_REQUEST',
+  LOAD_NOTREGISTEREDS_SUCCESS: 'subscriptions/LOAD_NOTREGISTEREDS_SUCCESS',
+  LOAD_NOTREGISTEREDS_FAILURE: 'subscriptions/LOAD_NOTREGISTEREDS_FAILURE',
+
+  LOAD_RECOMENDEDS_REQUEST: 'subscriptions/LOAD_RECOMENDEDS_REQUEST',
+  LOAD_RECOMENDEDS_SUCCESS: 'subscriptions/LOAD_RECOMENDEDS_SUCCESS',
+  LOAD_RECOMENDEDS_FAILURE: 'subscriptions/LOAD_RECOMENDEDS_FAILURE',
 };
 
 /**
@@ -14,21 +22,35 @@ export const Types = {
  */
 const INITIAL_STATE = {
   loading: false,
-  meetupsRegistered: [],
-  meetupsNotRegistered: [],
-  meetupsRecomendeds: []
+  registereds: [],
+  notRegistereds: [],
+  recomendeds: [],
 };
 
 export default function meetups(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.LOAD_REQUEST:
+    case Types.LOAD_REGISTEREDS_REQUEST:
       return { ...state, loading: true };
-    case Types.LOAD_SUCCESS:
+    case Types.LOAD_REGISTEREDS_SUCCESS:
+      return { ...state, loading: false, registereds: action.payload.meetups };
+    case Types.LOAD_REGISTEREDS_FAILURE:
+      action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
-    case Types.LOAD_FAILURE:
-      action.payload.errors.map(error =>
-        toast.error(error.message, { autoClose: 3000 })
-      );
+
+    case Types.LOAD_NOTREGISTEREDS_REQUEST:
+      return { ...state, loading: true };
+    case Types.LOAD_NOTREGISTEREDS_SUCCESS:
+      return { ...state, loading: false, notRegistereds: action.payload.meetups };
+    case Types.LOAD_NOTREGISTEREDS_FAILURE:
+      action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
+      return { ...state, loading: false };
+
+    case Types.LOAD_RECOMENDEDS_REQUEST:
+      return { ...state, loading: true };
+    case Types.LOAD_RECOMENDEDS_SUCCESS:
+      return { ...state, loading: false, recomendeds: action.payload.meetups };
+    case Types.LOAD_RECOMENDEDS_FAILURE:
+      action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
 
     default:
@@ -40,16 +62,42 @@ export default function meetups(state = INITIAL_STATE, action) {
  * ACTIONS
  */
 export const creators = {
-  loadSubscriptionsRequest: (meetups, history) => ({
-    type: Types.UPDATE_REQUEST,
-    payload: { meetups, history }
+  loadRegisteredsRequest: page => ({
+    type: Types.LOAD_REGISTEREDS_REQUEST,
+    payload: { page },
   }),
-  loadSubscriptionsSuccess: (user, history) => ({
-    type: Types.UPDATE_SUCCESS,
-    payload: { user, history }
+  loadRegisteredsSuccess: meetups => ({
+    type: Types.LOAD_REGISTEREDS_SUCCESS,
+    payload: { meetups },
   }),
-  loadSubscriptionsFailure: errors => ({
-    type: Types.UPDATE_FAILURE,
-    payload: { errors }
-  })
+  loadRegisteredsFailure: errors => ({
+    type: Types.LOAD_REGISTEREDS_FAILURE,
+    payload: { errors },
+  }),
+
+  loadNotRegisteredsRequest: page => ({
+    type: Types.LOAD_NOTREGISTEREDS_REQUEST,
+    payload: { page },
+  }),
+  loadNotRegisteredsSuccess: meetups => ({
+    type: Types.LOAD_NOTREGISTEREDS_SUCCESS,
+    payload: { meetups },
+  }),
+  loadNotRegisteredsFailure: errors => ({
+    type: Types.LOAD_NOTREGISTEREDS_FAILURE,
+    payload: { errors },
+  }),
+
+  loadRecomendedsRequest: page => ({
+    type: Types.LOAD_RECOMENDEDS_REQUEST,
+    payload: { page },
+  }),
+  loadRecomendedsSuccess: meetups => ({
+    type: Types.LOAD_RECOMENDEDS_SUCCESS,
+    payload: { meetups },
+  }),
+  loadRecomendedsFailure: errors => ({
+    type: Types.LOAD_RECOMENDEDS_FAILURE,
+    payload: { errors },
+  }),
 };

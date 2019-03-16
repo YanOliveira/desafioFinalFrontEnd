@@ -1,21 +1,31 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-import { Container, Content } from "./styles";
-import Header from "../../components/Header";
-import MeetupList from "../../components/MeetupList";
-import { creators as meetupsActions } from "../../store/ducks/meetups";
+import { Container, Content } from './styles';
+import Header from '../../components/Header';
+import MeetupList from '../../components/MeetupList';
+import { creators as subscriptionsActions } from '../../store/ducks/subscriptions';
 
 class Dashboard extends Component {
   static propTypes = {};
 
-  state = {};
+  state = {
+    registeredPage: 1,
+    notRegisteredPage: 1,
+    recomendedPage: 1,
+  };
 
-  async componentDidMount() {
-    //
+  componentDidMount() {
+    const {
+      loadRegisteredsRequest,
+      loadNotRegisteredsRequest,
+      loadRecomendedsRequest,
+    } = this.props;
+    loadRegisteredsRequest(this.state.registeredPage);
+    loadNotRegisteredsRequest(this.state.notRegisteredPage);
+    loadRecomendedsRequest(this.state.recomendedPage);
   }
 
   render() {
@@ -23,19 +33,24 @@ class Dashboard extends Component {
       <Container>
         <Header />
         <Content>
-          <MeetupList title="Incrições" />
-          <MeetupList title="Proximos" />
-          <MeetupList title="Recomendados" />
+          <MeetupList title="Incrições" meetups={this.props.registereds} />
+          <MeetupList title="Proximos" meetups={this.props.notRegistereds} />
+          <MeetupList title="Recomendados" meetups={this.props.recomendeds} />
         </Content>
       </Container>
     );
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(meetupsActions, dispatch);
+const mapStateToProps = state => ({
+  registereds: state.subscriptions.registereds,
+  notRegistereds: state.subscriptions.notRegistereds,
+  recomendeds: state.subscriptions.recomendeds,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(subscriptionsActions, dispatch);
 
 export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(Dashboard));
+  mapStateToProps,
+  mapDispatchToProps,
+)(Dashboard);

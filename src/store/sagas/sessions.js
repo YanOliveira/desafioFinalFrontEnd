@@ -10,20 +10,22 @@ export function* createSession(action) {
     const { data } = yield call(api.post, 'sessions', action.payload.user);
     yield login(data.token);
 
+    yield put(sessionsActions.createSessionSuccess(action.payload.history));
+
     const {
       data: {
         id, name, email, technologies,
       },
     } = yield call(api.get, 'users');
-    const user = {
-      id, name, email, technologies,
-    };
-    yield setUser(user);
+    yield setUser({
+      id,
+      name,
+      email,
+      technologies,
+    });
 
     const { data: allTechnologies } = yield call(api.get, 'technologies');
-    setTechnologies(allTechnologies);
-
-    yield put(sessionsActions.createSessionSuccess(action.payload.history));
+    yield setTechnologies(allTechnologies);
   } catch (error) {
     yield put(sessionsActions.createSessionFailure('Usuário ou senha incorretos.'));
   }

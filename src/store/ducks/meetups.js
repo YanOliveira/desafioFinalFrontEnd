@@ -41,8 +41,7 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.SHOW_REQUEST:
       return { ...state, loading: true };
     case Types.SHOW_SUCCESS:
-      action.payload.history.push('/meetups');
-      return { ...state, loading: false };
+      return { ...state, loading: false, meetup: action.payload.meetup };
     case Types.SHOW_FAILURE:
       action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
@@ -75,16 +74,16 @@ export const creators = {
     payload: { errors },
   }),
 
-  showMeetupRequest: (user, history) => ({
-    type: Types.UPDATE_REQUEST,
-    payload: { user, history },
+  showMeetupRequest: id => ({
+    type: Types.SHOW_REQUEST,
+    payload: { id },
   }),
-  showMeetupSuccess: (user, history) => ({
-    type: Types.UPDATE_SUCCESS,
-    payload: { user, history },
+  showMeetupSuccess: meetup => ({
+    type: Types.SHOW_SUCCESS,
+    payload: { meetup },
   }),
   showMeetupFailure: errors => ({
-    type: Types.UPDATE_FAILURE,
+    type: Types.SHOW_FAILURE,
     payload: { errors },
   }),
 

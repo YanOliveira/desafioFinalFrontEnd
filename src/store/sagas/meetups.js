@@ -4,7 +4,12 @@ import api from '../../services/api';
 import { creators as meetupsActions } from '../ducks/meetups';
 
 export function* showMeetup(action) {
-  yield console.tron.log(`teste${action}`);
+  try {
+    const { data } = yield call(api.get, `meetups/${action.payload.id}`);
+    yield put(meetupsActions.showMeetupSuccess(data));
+  } catch (error) {
+    yield put(meetupsActions.showMeetupFailure(error.response.data));
+  }
 }
 
 export function* uploadFile(action) {

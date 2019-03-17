@@ -1,42 +1,53 @@
-import React from "react";
+import React, { Component } from 'react';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { Container, Info } from "./styles";
-import Header from "../../components/Header";
+import { Container, Info } from './styles';
+import Header from '../../components/Header';
+import { creators as meetupsActions } from '../../store/ducks/meetups';
+import { creators as subscriptionsActions } from '../../store/ducks/subscriptions';
+import { BASE_URL } from '../../services/api';
 
-const Meetup = () => (
-  <div>
-    <Header />
-    <Container>
-      <img
-        src="https://brunomedeirosjj.com/wp-content/uploads/2017/09/treinamento-de-seo-online.png"
-        alt=""
-      />
-      <Info>
-        <strong>Titulo meetup</strong>
-        <span>120 Membros</span>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas
-          possimus debitis, asperiores illo nobis, earum numquam atque beatae
-          iste iure quia consequuntur odio vitae distinctio. Error nihil dicta
-          dolore aliquam?
-        </p>
-        <span>Realizado em:</span>
-        <small>Rua do evento, 260, cidade do evento - MG</small>
-      </Info>
+class Meetup extends Component {
+  componentDidMount() {
+    console.tron.log(this.props);
+    this.props.showMeetupRequest(this.props.match.params.id);
+  }
 
-      <button type="button">Inscreva-se</button>
-    </Container>
-  </div>
-);
+  handleSubscription = () => {
+    console.tron.log(this.props.match.params.id);
+  };
 
-// const mapStateToProps = state => ({});
+  render() {
+    const { meetup } = this.props;
+    return (
+      <div>
+        <Header />
+        <Container>
+          <img src={`${BASE_URL}/files/${meetup.file_id}`} alt={meetup.title} alt="" />
+          <Info>
+            <strong>{meetup.title}</strong>
+            <span>{meetup.users ? meetup.users.length : '0'} Membros</span>
+            <p>{meetup.description}</p>
+            <span>Realizado em:</span>
+            <small>{meetup.localization}</small>
+          </Info>
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(Actions, dispatch);
+          <button type="button" onClick={this.handleSubscription}>
+            Inscreva-se
+          </button>
+        </Container>
+      </div>
+    );
+  }
+}
 
-export default connect()(Meetup);
-// mapStateToProps,
-// mapDispatchToProps
+const mapStateToProps = state => ({ meetup: state.meetups.meetup });
+
+const mapDispatchToProps = dispatch => bindActionCreators({ ...meetupsActions, ...subscriptionsActions }, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Meetup);

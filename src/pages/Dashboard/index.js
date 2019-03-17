@@ -35,7 +35,7 @@ class Dashboard extends Component {
         <Header />
         <Content>
           <MeetupList title="Incrições" meetups={this.props.registereds} />
-          <MeetupList title="Próximos" meetups={this.props.notRegistereds} />
+          <MeetupList title="Próximos Meetups" meetups={this.props.notRegistereds} />
           <MeetupList title="Recomendados" meetups={this.props.recomendeds} />
         </Content>
       </Container>

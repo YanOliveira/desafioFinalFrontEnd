@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Info } from './styles';
 import Header from '../../components/Header';
 import { creators as meetupsActions } from '../../store/ducks/meetups';
@@ -34,7 +35,11 @@ class Meetup extends Component {
           </Info>
 
           <button type="button" onClick={this.handleSubscription}>
-            Inscreva-se
+            {this.props.loading ? (
+              <FontAwesomeIcon icon="spinner" pulse size="2x" />
+            ) : (
+              'Inscreva-se'
+            )}
           </button>
         </Container>
       </div>
@@ -42,7 +47,10 @@ class Meetup extends Component {
   }
 }
 
-const mapStateToProps = state => ({ meetup: state.meetups.meetup });
+const mapStateToProps = state => ({
+  meetup: state.meetups.meetup,
+  loading: state.subscriptions.loading,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...meetupsActions, ...subscriptionsActions }, dispatch);
 

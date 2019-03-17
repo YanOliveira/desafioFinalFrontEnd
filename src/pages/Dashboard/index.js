@@ -24,9 +24,9 @@ class Dashboard extends Component {
       loadNotRegisteredsRequest,
       loadRecomendedsRequest,
     } = this.props;
-    // loadRegisteredsRequest(this.state.registeredPage);
-    // loadNotRegisteredsRequest(this.state.notRegisteredPage);
-    // loadRecomendedsRequest(this.state.recomendedPage);
+    loadRegisteredsRequest(this.state.registeredPage);
+    loadNotRegisteredsRequest(this.state.notRegisteredPage);
+    loadRecomendedsRequest(this.state.recomendedPage);
   };
 
   render() {

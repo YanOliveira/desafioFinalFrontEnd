@@ -34,3 +34,7 @@ export function* addMeetup(action) {
     yield put(meetupsActions.addMeetupFailure(error.response.data));
   }
 }
+
+export function* redirectIfAdd(action) {
+  action.payload.history.push('/');
+}

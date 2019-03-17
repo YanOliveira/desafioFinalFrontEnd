@@ -9,9 +9,6 @@ export function* createSession(action) {
   try {
     const { data } = yield call(api.post, 'sessions', action.payload.user);
     yield login(data.token);
-
-    yield put(sessionsActions.createSessionSuccess(action.payload.history));
-
     const {
       data: {
         id, name, email, technologies,
@@ -26,6 +23,7 @@ export function* createSession(action) {
 
     const { data: allTechnologies } = yield call(api.get, 'technologies');
     yield setTechnologies(allTechnologies);
+    yield put(sessionsActions.createSessionSuccess(action.payload.history));
   } catch (error) {
     yield put(sessionsActions.createSessionFailure('Usuário ou senha incorretos.'));
   }
@@ -38,4 +36,8 @@ export function* destroySession(action) {
   } catch (error) {
     yield put(sessionsActions.destroySessionFailure('Algo não deu certo.'));
   }
+}
+
+export function* redirectIfLogin(action) {
+  action.payload.history.push('/');
 }

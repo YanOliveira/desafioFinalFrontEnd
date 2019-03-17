@@ -26,7 +26,6 @@ export default function sessions(state = INITIAL_STATE, action) {
       return { ...state, loading: true };
     case Types.CREATE_SUCCESS:
       toast.success('Login efetuado com sucesso !', { autoClose: 2000 });
-      action.payload.history.push('/');
       return { ...state, loading: false };
     case Types.CREATE_FAILURE:
       toast.error(action.payload.error, { autoClose: 3000 });

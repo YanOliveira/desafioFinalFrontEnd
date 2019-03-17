@@ -27,6 +27,22 @@ export const Container = styled.div`
     margin-top: -40px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      font-size: ${fonts.medium};
+      color: ${colors.white};
+      background: ${colors.primary};
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    }
   }
 `;
 
@@ -44,19 +60,4 @@ export const Info = styled.div`
   }
 `;
 
-export const Button = styled.button`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: ${fonts.medium};
-  color: ${colors.white};
-  background: ${colors.primary};
-  &:hover {
-    cursor: pointer;
-    opacity: 0.9;
-  }
-`;
+export const Button = styled.button``;

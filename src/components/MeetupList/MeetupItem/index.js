@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BASE_URL } from '../../../services/api';
 
@@ -14,9 +15,9 @@ const MeetupItem = props => (
         <strong>{props.meetup.title}</strong>
         <span>{props.meetup.users.length} Inscritos</span>
       </Info>
-      <Button type="button">
+      <Link to={`meetups/${props.meetup.id}`}>
         <FontAwesomeIcon icon="angle-right" />
-      </Button>
+      </Link>
     </div>
   </Container>
 );

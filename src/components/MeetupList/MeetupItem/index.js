@@ -15,7 +15,7 @@ const MeetupItem = props => (
         <strong>{props.meetup.title}</strong>
         <span>{props.meetup.users.length} Inscritos</span>
       </Info>
-      <Link to={`meetups/${props.meetup.id}`}>
+      <Link to={`meetup/${props.meetup.id}`}>
         <FontAwesomeIcon icon="angle-right" />
       </Link>
     </div>

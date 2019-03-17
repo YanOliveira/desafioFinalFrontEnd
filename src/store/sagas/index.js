@@ -1,5 +1,5 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { addUser, updateUser } from './users';
+import { addUser, updateUser, redirectIfUpdate } from './users';
 import { createSession, destroySession, redirectIfLogin } from './sessions';
 import {
   showMeetup, addMeetup, uploadFile, redirectIfAdd,
@@ -19,6 +19,7 @@ export default function* rootSaga() {
   yield all([
     takeLatest(usersTypes.ADD_REQUEST, addUser),
     takeLatest(usersTypes.UPDATE_REQUEST, updateUser),
+    takeLatest(usersTypes.UPDATE_SUCCESS, redirectIfUpdate),
 
     takeLatest(sessionsTypes.CREATE_REQUEST, createSession),
     takeLatest(sessionsTypes.CREATE_SUCCESS, redirectIfLogin),

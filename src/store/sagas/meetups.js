@@ -31,7 +31,6 @@ export function* uploadFile(action) {
 }
 
 export function* addMeetup(action) {
-  console.tron.log(action.payload.meetup);
   try {
     yield call(api.post, 'meetups', action.payload.meetup);
     yield put(meetupsActions.addMeetupSuccess(action.payload.meetup, action.payload.history));
@@ -41,5 +40,5 @@ export function* addMeetup(action) {
 }
 
 export function* redirectIfAdd(action) {
-  action.payload.history.push('/');
+  yield action.payload.history.push('/');
 }

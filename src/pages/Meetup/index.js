@@ -25,7 +25,7 @@ class Meetup extends Component {
       <div>
         <Header />
         <Container>
-          <img src={`${BASE_URL}/files/${meetup.file_id}`} alt={meetup.title} alt="" />
+          <img src={`${BASE_URL}/files/${meetup.file_id}`} alt={meetup.title} />
           <Info>
             <strong>{meetup.title}</strong>
             <span>{meetup.users ? meetup.users.length : '0'} Membros</span>

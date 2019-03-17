@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BASE_URL } from '../../../services/api';
 
-import { Container, Button, Info } from './styles';
+import { Container, Info } from './styles';
 
 const MeetupItem = props => (
   <Container>

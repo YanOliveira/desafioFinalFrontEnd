@@ -39,5 +39,5 @@ export function* destroySession(action) {
 }
 
 export function* redirectIfLogin(action) {
-  action.payload.history.push('/');
+  yield action.payload.history.push('/');
 }

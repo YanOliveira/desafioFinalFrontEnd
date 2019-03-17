@@ -26,14 +26,15 @@ class Profile extends Component {
 
   componentDidMount() {
     const user = JSON.parse(getUser());
-    user.technologies.map(item => {
+    user.technologies.forEach(item => {
       this.setState({
         technologies: updateCheckedBoxes(
           this.state.technologies,
           !!item.id ? item.id.toString() : item.toString()
         )
-      });
+      });      
     });
+
     this.setState({ name: user.name });
   }
 

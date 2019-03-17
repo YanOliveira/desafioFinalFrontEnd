@@ -38,8 +38,7 @@ export default function users(state = INITIAL_STATE, action) {
     case Types.UPDATE_REQUEST:
       return { ...state, loading: true };
     case Types.UPDATE_SUCCESS:
-      action.payload.history.push('/');
-      toast.success('Preferências atualizadas com sucesso !', {
+      toast.success('Perfil atualizado com sucesso !', {
         autoClose: 3000,
       });
       return { ...state, loading: false };

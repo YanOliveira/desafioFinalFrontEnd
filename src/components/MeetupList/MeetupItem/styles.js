@@ -59,5 +59,3 @@ export const Info = styled.div`
     font-size: ${fonts.small};
   }
 `;
-
-export const Button = styled.button``;

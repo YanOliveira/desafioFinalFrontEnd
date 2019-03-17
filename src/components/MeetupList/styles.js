@@ -13,6 +13,6 @@ export const Container = styled.div`
   > div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
   }
 `;

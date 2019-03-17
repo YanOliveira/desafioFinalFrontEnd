@@ -1,13 +1,19 @@
-import styled from "styled-components";
-import { colors, fonts } from "../../../styles/defaults";
+import styled from 'styled-components';
+import { colors, fonts } from '../../../styles/defaults';
 
 export const Container = styled.div`
   width: 290px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-right: 15px;
+  &:last-child {
+    margin-right: 0;
+  }
   img {
     width: 290px;
+    height: 200px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }

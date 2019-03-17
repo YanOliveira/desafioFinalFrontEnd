@@ -13,7 +13,7 @@ export const Container = styled.div`
   }
   img {
     width: 290px;
-    height: 200px;
+    height: 150px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
@@ -52,6 +52,7 @@ export const Info = styled.div`
   strong {
     color: ${colors.darker};
     font-size: ${fonts.regular};
+    width: 200px;
     margin-bottom: 5px;
   }
   span {

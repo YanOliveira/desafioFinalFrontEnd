@@ -11,7 +11,11 @@ const MeetupItem = props => (
     <img src={`${BASE_URL}/files/${props.meetup.file_id}`} alt={props.meetup.title} />
     <div>
       <Info>
-        <strong>{props.meetup.title}</strong>
+        <strong>
+          {props.meetup.title.length > 10
+            ? `${props.meetup.title.substr(0, 22)}...`
+            : props.meetup.title}
+        </strong>
         <span>{props.meetup.users.length} Inscritos</span>
       </Info>
       <Link to={`meetup/${props.meetup.meetup_id || props.meetup.id}`}>

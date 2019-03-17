@@ -35,3 +35,12 @@ export function* loadRecomendeds(action) {
     yield put(subscriptionsActions.loadRecomendedsFailure(error.response.data));
   }
 }
+
+export function* createSubscription(action) {
+  try {
+    yield call(api.post, `subscriptions/${action.payload.meetup_id}`);
+    yield put(subscriptionsActions.createSubscriptionSuccess());
+  } catch (error) {
+    yield put(subscriptionsActions.createSubscriptionFailure(error.response.data));
+  }
+}

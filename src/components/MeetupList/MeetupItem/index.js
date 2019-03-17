@@ -8,14 +8,13 @@ import { Container, Button, Info } from './styles';
 
 const MeetupItem = props => (
   <Container>
-    {console.tron.log(props.meetup)}
     <img src={`${BASE_URL}/files/${props.meetup.file_id}`} alt={props.meetup.title} />
     <div>
       <Info>
         <strong>{props.meetup.title}</strong>
         <span>{props.meetup.users.length} Inscritos</span>
       </Info>
-      <Link to={`meetup/${props.meetup.id}`}>
+      <Link to={`meetup/${props.meetup.meetup_id || props.meetup.id}`}>
         <FontAwesomeIcon icon="angle-right" />
       </Link>
     </div>

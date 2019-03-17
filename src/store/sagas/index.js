@@ -4,7 +4,12 @@ import { createSession, destroySession, redirectIfLogin } from './sessions';
 import {
   showMeetup, addMeetup, uploadFile, redirectIfAdd,
 } from './meetups';
-import { loadRegistereds, loadNotRegistereds, loadRecomendeds } from './subscriptions';
+import {
+  loadRegistereds,
+  loadNotRegistereds,
+  loadRecomendeds,
+  createSubscription,
+} from './subscriptions';
 import { Types as usersTypes } from '../ducks/users';
 import { Types as sessionsTypes } from '../ducks/sessions';
 import { Types as meetupsTypes } from '../ducks/meetups';
@@ -27,5 +32,6 @@ export default function* rootSaga() {
     takeLatest(subscriptionsTypes.LOAD_REGISTEREDS_REQUEST, loadRegistereds),
     takeLatest(subscriptionsTypes.LOAD_NOTREGISTEREDS_REQUEST, loadNotRegistereds),
     takeLatest(subscriptionsTypes.LOAD_RECOMENDEDS_REQUEST, loadRecomendeds),
+    takeLatest(subscriptionsTypes.ADD_REQUEST, createSubscription),
   ]);
 }

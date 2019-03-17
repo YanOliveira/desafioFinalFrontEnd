@@ -11,12 +11,11 @@ import { BASE_URL } from '../../services/api';
 
 class Meetup extends Component {
   componentDidMount() {
-    console.tron.log(this.props);
     this.props.showMeetupRequest(this.props.match.params.id);
   }
 
   handleSubscription = () => {
-    console.tron.log(this.props.match.params.id);
+    this.props.createSubscriptionRequest(this.props.match.params.id);
   };
 
   render() {

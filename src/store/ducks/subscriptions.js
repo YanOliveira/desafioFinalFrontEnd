@@ -15,6 +15,10 @@ export const Types = {
   LOAD_RECOMENDEDS_REQUEST: 'subscriptions/LOAD_RECOMENDEDS_REQUEST',
   LOAD_RECOMENDEDS_SUCCESS: 'subscriptions/LOAD_RECOMENDEDS_SUCCESS',
   LOAD_RECOMENDEDS_FAILURE: 'subscriptions/LOAD_RECOMENDEDS_FAILURE',
+
+  ADD_REQUEST: 'subscriptions/ADD_REQUEST',
+  ADD_SUCCESS: 'subscriptions/ADD_SUCCESS',
+  ADD_FAILURE: 'subscriptions/ADD_FAILURE',
 };
 
 /**
@@ -50,6 +54,15 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.LOAD_RECOMENDEDS_SUCCESS:
       return { ...state, loading: false, recomendeds: action.payload.meetups };
     case Types.LOAD_RECOMENDEDS_FAILURE:
+      action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
+      return { ...state, loading: false };
+
+    case Types.ADD_REQUEST:
+      return { ...state, loading: true };
+    case Types.ADD_SUCCESS:
+      toast.success('Inscrição realizada com sucesso ! :)', { autoClose: 3000 });
+      return { ...state, loading: false };
+    case Types.ADD_FAILURE:
       action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
 
@@ -98,6 +111,18 @@ export const creators = {
   }),
   loadRecomendedsFailure: errors => ({
     type: Types.LOAD_RECOMENDEDS_FAILURE,
+    payload: { errors },
+  }),
+
+  createSubscriptionRequest: meetup_id => ({
+    type: Types.ADD_REQUEST,
+    payload: { meetup_id },
+  }),
+  createSubscriptionSuccess: () => ({
+    type: Types.ADD_SUCCESS,
+  }),
+  createSubscriptionFailure: errors => ({
+    type: Types.ADD_FAILURE,
     payload: { errors },
   }),
 };

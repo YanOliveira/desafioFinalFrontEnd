@@ -6,9 +6,13 @@ import { creators as subscriptionsActions } from '../ducks/subscriptions';
 export function* loadRegistereds(action) {
   try {
     const {
-      data: { data },
-    } = yield call(api.get, `subscriptions?registered=true&page=${action.payload.page}`);
-    yield put(subscriptionsActions.loadRegisteredsSuccess(data));
+      data: { data, lastPage },
+    } = yield call(
+      api.get,
+      `subscriptions?registered=true&page=${action.payload.page}&search=${action.payload.search
+        || ''}`,
+    );
+    yield put(subscriptionsActions.loadRegisteredsSuccess(data, lastPage));
   } catch (error) {
     yield put(subscriptionsActions.loadRegisteredsFailure(error.response.data));
   }
@@ -17,9 +21,14 @@ export function* loadRegistereds(action) {
 export function* loadNotRegistereds(action) {
   try {
     const {
-      data: { data },
-    } = yield call(api.get, `subscriptions?registered=false&page=${action.payload.page}`);
-    yield put(subscriptionsActions.loadNotRegisteredsSuccess(data));
+      data: { data, lastPage },
+    } = yield call(
+      api.get,
+      `subscriptions?registered=false&page=${action.payload.page}&search=${action.payload.search
+        || ''}`,
+    );
+    console.tron.log(action.payload.page);
+    yield put(subscriptionsActions.loadNotRegisteredsSuccess(data, lastPage));
   } catch (error) {
     yield put(subscriptionsActions.loadNotRegisteredsFailure(error.response.data));
   }
@@ -28,9 +37,12 @@ export function* loadNotRegistereds(action) {
 export function* loadRecomendeds(action) {
   try {
     const {
-      data: { data },
-    } = yield call(api.get, `subscriptions?page=${action.payload.page}`);
-    yield put(subscriptionsActions.loadRecomendedsSuccess(data));
+      data: { data, lastPage },
+    } = yield call(
+      api.get,
+      `subscriptions?page=${action.payload.page}&search=${action.payload.search || ''}`,
+    );
+    yield put(subscriptionsActions.loadRecomendedsSuccess(data, lastPage));
   } catch (error) {
     yield put(subscriptionsActions.loadRecomendedsFailure(error.response.data));
   }

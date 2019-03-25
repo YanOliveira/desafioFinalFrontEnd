@@ -30,18 +30,19 @@ class Dashboard extends Component {
     loadRecomendedsRequest(this.state.recomendedPage);
   };
 
-  handleSearch(e) {
+  handleSearch(search) {
     const {
       loadRegisteredsRequest,
       loadNotRegisteredsRequest,
       loadRecomendedsRequest,
     } = this.props;
-    loadRegisteredsRequest(this.state.registeredPage);
-    loadNotRegisteredsRequest(this.state.notRegisteredPage);
-    loadRecomendedsRequest(this.state.recomendedPage);
+    loadRegisteredsRequest(this.state.registeredPage, search);
+    loadNotRegisteredsRequest(this.state.notRegisteredPage, search);
+    loadRecomendedsRequest(this.state.recomendedPage, search);
   }
 
   render() {
+    console.tron.log(this.props);
     return (
       <Container>
         <Header />
@@ -58,9 +59,57 @@ class Dashboard extends Component {
               />
             </Search>
           )}
-          <MeetupList title="Incrições" meetups={this.props.registereds} />
-          <MeetupList title="Próximos Meetups" meetups={this.props.notRegistereds} />
-          <MeetupList title="Recomendados" meetups={this.props.recomendeds} />
+          {this.props.registereds.length > 0 && (
+            <div className="list">
+              <div className="icon">
+                <FontAwesomeIcon icon="angle-left" />
+              </div>
+              <MeetupList title="Incrições" meetups={this.props.registereds} />
+              <div className="icon">
+                <FontAwesomeIcon icon="angle-right" />
+              </div>
+            </div>
+          )}
+          
+          {this.props.notRegistereds.length > 0 && (
+            <div className="list">
+              <div
+                className="icon"
+                onClick={() => {
+                  this.setState({
+                    notRegisteredPage: this.state.notRegisteredPage > 1 && this.state.notRegisteredPage - 1,
+                  });
+                  this.props.loadNotRegisteredsRequest(this.state.notRegisteredPage);
+                }}
+              >
+                <FontAwesomeIcon icon="angle-left" />
+              </div>
+              <MeetupList title="Próximos Meetups" meetups={this.props.notRegistereds} />
+              <div
+                className="icon"
+                onClick={() => {
+                  this.setState({
+                    notRegisteredPage: this.state.notRegisteredPage < this.props.notRegisteredsLastPage && this.state.notRegisteredPage + 1,
+                  });
+                  this.props.loadNotRegisteredsRequest(this.state.notRegisteredPage);
+                }}
+              >
+                <FontAwesomeIcon icon="angle-right" />
+              </div>
+            </div>
+          )}
+
+          {this.props.recomendeds.length > 0 && (
+            <div className="list">
+              <div className="icon">
+                <FontAwesomeIcon icon="angle-left" />
+              </div>
+              <MeetupList title="Recomendados" meetups={this.props.recomendeds} />
+              <div className="icon">
+                <FontAwesomeIcon icon="angle-right" />
+              </div>
+            </div>
+          )}
         </Content>
       </Container>
     );
@@ -72,6 +121,9 @@ const mapStateToProps = state => ({
   registereds: state.subscriptions.registereds,
   notRegistereds: state.subscriptions.notRegistereds,
   recomendeds: state.subscriptions.recomendeds,
+  registeredsLastPage: state.subscriptions.registeredsLastPage,
+  notRegisteredsLastPage: state.subscriptions.notRegisteredsLastPage,
+  recomendedsLastPage: state.subscriptions.recomendedsLastPage,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(subscriptionsActions, dispatch);

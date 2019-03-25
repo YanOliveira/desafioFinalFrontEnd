@@ -6,7 +6,6 @@ import MeetupItem from './MeetupItem';
 
 const MeetupList = props => (
   <Container>
-    {console.tron.log(props)}
     <strong>{props.title}</strong>
     <div>
       {props.meetups.map(meetup => (

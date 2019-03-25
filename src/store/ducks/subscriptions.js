@@ -29,6 +29,9 @@ const INITIAL_STATE = {
   registereds: [],
   notRegistereds: [],
   recomendeds: [],
+  registeredsLastPage: null,
+  notRegisteredsLastPage: null,
+  recomendedsLastPage: null,
 };
 
 export default function meetups(state = INITIAL_STATE, action) {
@@ -36,7 +39,12 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.LOAD_REGISTEREDS_REQUEST:
       return { ...state, loading: true };
     case Types.LOAD_REGISTEREDS_SUCCESS:
-      return { ...state, loading: false, registereds: action.payload.meetups };
+      return {
+        ...state,
+        loading: false,
+        registereds: action.payload.meetups,
+        registeredsLastPage: action.payload.lastPage,
+      };
     case Types.LOAD_REGISTEREDS_FAILURE:
       action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
@@ -44,7 +52,12 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.LOAD_NOTREGISTEREDS_REQUEST:
       return { ...state, loading: true };
     case Types.LOAD_NOTREGISTEREDS_SUCCESS:
-      return { ...state, loading: false, notRegistereds: action.payload.meetups };
+      return {
+        ...state,
+        loading: false,
+        notRegistereds: action.payload.meetups,
+        notRegisteredsLastPage: action.payload.lastPage,
+      };
     case Types.LOAD_NOTREGISTEREDS_FAILURE:
       action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
@@ -52,7 +65,12 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.LOAD_RECOMENDEDS_REQUEST:
       return { ...state, loading: true };
     case Types.LOAD_RECOMENDEDS_SUCCESS:
-      return { ...state, loading: false, recomendeds: action.payload.meetups };
+      return {
+        ...state,
+        loading: false,
+        recomendeds: action.payload.meetups,
+        recomendedsLastPage: action.payload.lastPage,
+      };
     case Types.LOAD_RECOMENDEDS_FAILURE:
       action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
@@ -75,39 +93,39 @@ export default function meetups(state = INITIAL_STATE, action) {
  * ACTIONS
  */
 export const creators = {
-  loadRegisteredsRequest: page => ({
+  loadRegisteredsRequest: (page, search) => ({
     type: Types.LOAD_REGISTEREDS_REQUEST,
-    payload: { page },
+    payload: { page, search },
   }),
-  loadRegisteredsSuccess: meetups => ({
+  loadRegisteredsSuccess: (meetups, lastPage) => ({
     type: Types.LOAD_REGISTEREDS_SUCCESS,
-    payload: { meetups },
+    payload: { meetups, lastPage },
   }),
   loadRegisteredsFailure: errors => ({
     type: Types.LOAD_REGISTEREDS_FAILURE,
     payload: { errors },
   }),
 
-  loadNotRegisteredsRequest: page => ({
+  loadNotRegisteredsRequest: (page, search) => ({
     type: Types.LOAD_NOTREGISTEREDS_REQUEST,
-    payload: { page },
+    payload: { page, search },
   }),
-  loadNotRegisteredsSuccess: meetups => ({
+  loadNotRegisteredsSuccess: (meetups, lastPage) => ({
     type: Types.LOAD_NOTREGISTEREDS_SUCCESS,
-    payload: { meetups },
+    payload: { meetups, lastPage },
   }),
   loadNotRegisteredsFailure: errors => ({
     type: Types.LOAD_NOTREGISTEREDS_FAILURE,
     payload: { errors },
   }),
 
-  loadRecomendedsRequest: page => ({
+  loadRecomendedsRequest: (page, search) => ({
     type: Types.LOAD_RECOMENDEDS_REQUEST,
-    payload: { page },
+    payload: { page, search },
   }),
-  loadRecomendedsSuccess: meetups => ({
+  loadRecomendedsSuccess: (meetups, lastPage) => ({
     type: Types.LOAD_RECOMENDEDS_SUCCESS,
-    payload: { meetups },
+    payload: { meetups, lastPage },
   }),
   loadRecomendedsFailure: errors => ({
     type: Types.LOAD_RECOMENDEDS_FAILURE,

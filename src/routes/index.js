@@ -15,6 +15,7 @@ const Routes = () => (
     <Fragment>
       <Switch>
         <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute path="/search" component={Dashboard} />
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/meetup/:id" component={Meetup} />
         <PrivateRoute path="/newmeetup" component={NewMeetup} />

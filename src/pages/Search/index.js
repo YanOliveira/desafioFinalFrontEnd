@@ -4,12 +4,12 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, Content, Search } from "./styles";
+import { Container, Content, DivSearch } from "./styles";
 import Header from "../../components/Header";
 import MeetupList from "../../components/MeetupList";
 import { creators as subscriptionsActions } from "../../store/ducks/subscriptions";
 
-class Dashboard extends Component {
+class Search extends Component {
   static propTypes = {};
 
   state = {
@@ -97,7 +97,7 @@ class Dashboard extends Component {
         <Header />
         <Content>
           {this.props.match.url === "/search" && (
-            <Search>
+            <DivSearch>
               <div className="logo">
                 <FontAwesomeIcon className="icon" icon="search" />
               </div>
@@ -107,7 +107,7 @@ class Dashboard extends Component {
                 onChange={e => this.handleSearch(e.target.value)}
                 on
               />
-            </Search>
+            </DivSearch>
           )}
           {this.props.registereds.length > 0 && (
             <div className="list">
@@ -190,4 +190,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dashboard);
+)(Search);

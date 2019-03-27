@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Info } from './styles';
@@ -21,7 +22,7 @@ class Meetup extends Component {
   };
 
   handleSubscription = () => {
-    this.props.createSubscriptionRequest(this.props.match.params.id);
+    this.props.createSubscriptionRequest(this.props.match.params.id, this.props.history);
   };
 
   verifySubscription() {
@@ -57,8 +58,7 @@ class Meetup extends Component {
             onClick={this.handleSubscription}
             className={this.verifySubscription() && 'disabled'}
             disabled={this.verifySubscription() && 'disabled'}
-
-            >
+          >
             {this.props.loading ? (
               <FontAwesomeIcon icon="spinner" pulse size="2x" />
             ) : this.verifySubscription() ? (
@@ -83,4 +83,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({ ...meetupsActions, .
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Meetup);
+)(withRouter(Meetup));

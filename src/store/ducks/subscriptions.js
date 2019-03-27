@@ -132,12 +132,13 @@ export const creators = {
     payload: { errors },
   }),
 
-  createSubscriptionRequest: meetup_id => ({
+  createSubscriptionRequest: (meetup_id, history) => ({
     type: Types.ADD_REQUEST,
-    payload: { meetup_id },
+    payload: { meetup_id, history },
   }),
-  createSubscriptionSuccess: () => ({
+  createSubscriptionSuccess: history => ({
     type: Types.ADD_SUCCESS,
+    payload: { history },
   }),
   createSubscriptionFailure: errors => ({
     type: Types.ADD_FAILURE,

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colors, fonts } from "../../styles/defaults";
+import styled from 'styled-components';
+import { colors, fonts } from '../../styles/defaults';
 
 export const Container = styled.div`
   display: flex;
@@ -22,6 +22,13 @@ export const Container = styled.div`
     &:hover {
       cursor: pointer;
       opacity: 0.9;
+    }
+  }
+  .disabled {
+    background: #a73e50;
+    &:hover {
+      cursor: auto;
+      opacity: 1;
     }
   }
 `;

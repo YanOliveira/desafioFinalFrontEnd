@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colors, fonts } from "../../styles/defaults";
+import styled from 'styled-components';
+import { colors, fonts } from '../../styles/defaults';
 
 export const Container = styled.div`
   display: flex;
@@ -10,6 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  width: 900px;
   height: 100%;
   display: flex;
   flex-direction: column;

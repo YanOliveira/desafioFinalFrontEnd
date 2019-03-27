@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, Content, Search } from "./styles";
+import { Container, Content } from "./styles";
 import Header from "../../components/Header";
 import MeetupList from "../../components/MeetupList";
 import { creators as subscriptionsActions } from "../../store/ducks/subscriptions";
@@ -15,36 +15,27 @@ class Dashboard extends Component {
   state = {
     registeredPage: 1,
     notRegisteredPage: 1,
-    recomendedPage: 1,
-    search: ""
+    recomendedPage: 1    
   };
 
   componentDidMount = () => {
-    this.props.loadRegisteredsRequest(1, this.state.search);
-    this.props.loadNotRegisteredsRequest(1, this.state.search);
-    this.props.loadRecomendedsRequest(1, this.state.search);
+    this.props.loadRegisteredsRequest(1);
+    this.props.loadNotRegisteredsRequest(1);
+    this.props.loadRecomendedsRequest(1);
   };
 
-  handleSearch = async search => {
-    await this.setState({ search: search });
-    this.props.loadRegisteredsRequest(1, this.state.search);
-    this.props.loadNotRegisteredsRequest(1, this.state.search);
-    this.props.loadRecomendedsRequest(1, this.state.search);
-  };
-
-  handlePaginateRegistereds = async option => {
-    const search = this.props.match.url === "/search" ? this.state.search : "";
+  handlePaginateRegistereds = async option => {  
     const { registeredPage } = this.state;
     const { registeredsLastPage, loadRegisteredsRequest } = this.props;
     if (option === "next") {
       if (registeredPage < registeredsLastPage) {
         await this.setState({ registeredPage: registeredPage + 1 });
-        loadRegisteredsRequest(this.state.registeredPage, search);
+        loadRegisteredsRequest(this.state.registeredPage);
       }
     } else {
       if (registeredPage > 1) {
         await this.setState({ registeredPage: registeredPage - 1 });
-        loadRegisteredsRequest(this.state.registeredPage, search);
+        loadRegisteredsRequest(this.state.registeredPage);
       }
     }
   };
@@ -58,8 +49,7 @@ class Dashboard extends Component {
           notRegisteredPage: notRegisteredPage + 1
         });
         loadNotRegisteredsRequest(
-          this.state.notRegisteredPage,
-          this.state.search
+          this.state.notRegisteredPage          
         );
       }
     } else {
@@ -68,8 +58,7 @@ class Dashboard extends Component {
           notRegisteredPage: notRegisteredPage - 1
         });
         loadNotRegisteredsRequest(
-          this.state.notRegisteredPage,
-          this.state.search
+          this.state.notRegisteredPage        
         );
       }
     }
@@ -81,12 +70,12 @@ class Dashboard extends Component {
     if (option === "next") {
       if (recomendedPage < recomendedsLastPage) {
         await this.setState({ recomendedPage: recomendedPage + 1 });
-        loadRecomendedsRequest(this.state.recomendedPage, this.state.search);
+        loadRecomendedsRequest(this.state.recomendedPage);
       }
     } else {
       if (recomendedPage > 1) {
         await this.setState({ recomendedPage: recomendedPage - 1 });
-        loadRecomendedsRequest(this.state.recomendedPage, this.state.search);
+        loadRecomendedsRequest(this.state.recomendedPage);
       }
     }
   };
@@ -95,20 +84,7 @@ class Dashboard extends Component {
     return (
       <Container>
         <Header />
-        <Content>
-          {this.props.match.url === "/search" && (
-            <Search>
-              <div className="logo">
-                <FontAwesomeIcon className="icon" icon="search" />
-              </div>
-              <input
-                type="text"
-                placeholder="Buscar Meetups"
-                onChange={e => this.handleSearch(e.target.value)}
-                on
-              />
-            </Search>
-          )}
+        <Content>          
           {this.props.registereds.length > 0 && (
             <div className="list">
               <div

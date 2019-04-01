@@ -64,7 +64,7 @@ export const Form = styled.form`
     font-size: ${fonts.large};
     color: ${colors.lighter};
     &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
+      box-shadow: 0 0 0 30px ${colors.secondary} inset !important;
       -webkit-text-fill-color: ${colors.white} !important;
     }
     &:invalid {
@@ -76,6 +76,7 @@ export const Form = styled.form`
     overflow: hidden;
   }
 `;
+
 export const File = styled.div`
   display: flex;
   span {

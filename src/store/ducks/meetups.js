@@ -21,7 +21,6 @@ export const Types = {
  */
 const INITIAL_STATE = {
   loading: false,
-  file_id: '',
   meetup: [],
 };
 

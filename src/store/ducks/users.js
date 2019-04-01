@@ -18,7 +18,6 @@ export const Types = {
  */
 const INITIAL_STATE = {
   loading: false,
-  user: [],
 };
 
 export default function users(state = INITIAL_STATE, action) {

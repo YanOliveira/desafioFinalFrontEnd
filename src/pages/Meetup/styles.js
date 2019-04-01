@@ -25,7 +25,7 @@ export const Container = styled.div`
     }
   }
   .disabled {
-    background: #a73e50;
+    background: ${colors.dark};
     &:hover {
       cursor: auto;
       opacity: 1;

@@ -14,7 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class Profile extends Component {
   static propTypes = {
     updateUserRequest: PropTypes.func.isRequired,
-    history: PropTypes.func.isRequired
+    history: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
   };
 
   state = {

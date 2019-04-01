@@ -1,26 +1,27 @@
-import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { creators as SessionsActions } from "../../store/ducks/sessions";
-import { Container, Content } from "./styles";
-import { Button, Form } from "../../styles/components";
-import LogoIcon from "../../assets/images/logo.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { creators as SessionsActions } from '../../store/ducks/sessions';
+import { Container, Content } from './styles';
+import { Button, Form } from '../../styles/components';
+import LogoIcon from '../../assets/images/logo.svg';
 
 class SignIn extends Component {
   state = {
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   };
 
   static propTypes = {
     createSessionRequest: PropTypes.func.isRequired,
-    history: PropTypes.shape().isRequired
+    history: PropTypes.shape.isRequired,
+    loading: PropTypes.bool.isRequired,
   };
 
-  handleSignIn = e => {
+  handleSignIn = (e) => {
     e.preventDefault();
     const { createSessionRequest, history } = this.props;
     createSessionRequest(this.state, history);
@@ -49,11 +50,7 @@ class SignIn extends Component {
               onChange={e => this.setState({ password: e.target.value })}
             />
             <Button type="submit">
-              {!!this.props.loading ? (
-                <FontAwesomeIcon icon="spinner" pulse size="2x" />
-              ) : (
-                "Entrar"
-              )}
+              {this.props.loading ? <FontAwesomeIcon icon="spinner" pulse size="2x" /> : 'Entrar'}
             </Button>
           </Form>
           <Link to="/signup">Criar conta grátis</Link>
@@ -64,13 +61,12 @@ class SignIn extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.sessions.loading
+  loading: state.sessions.loading,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(SessionsActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(SessionsActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withRouter(SignIn));

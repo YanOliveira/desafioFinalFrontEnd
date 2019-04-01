@@ -21,7 +21,8 @@ import {
 class NewMeetup extends Component {
   static propTypes = {
     uploadRequest: PropTypes.func.isRequired,
-    history: PropTypes.func.isRequired
+    history: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
   };
 
   state = {

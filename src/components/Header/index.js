@@ -1,24 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, Nav, Profile } from "./styles";
-import { creators as SessionsActions } from "../../store/ducks/sessions";
-import LogoIcon from "../../assets/images/logo-white.svg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container, Nav, Profile } from './styles';
+import { creators as SessionsActions } from '../../store/ducks/sessions';
+import LogoIcon from '../../assets/images/logo-white.svg';
 
-const handleLogout = props => {
-  props.destroySessionRequest(props.history);
-};
-handleLogout.propTypes = {
-  destroySessionRequest: PropTypes.func.isRequired,
-  history: PropTypes.shape().isRequired
+const handleLogout = (destroySessionRequest, history) => {
+  destroySessionRequest(history);
 };
 
-const Header = props => (
+const Header = ({ destroySessionRequest, history }) => (
   <Container>
     <Nav>
       <img src={LogoIcon} alt="Meetups App" />
@@ -44,7 +40,7 @@ const Header = props => (
               Perfil
             </li>
           </Link>
-          <li onClick={() => handleLogout(props)}>
+          <li onClick={() => handleLogout(destroySessionRequest, history)}>
             <FontAwesomeIcon className="icon" icon="window-close" />
             Sair
           </li>
@@ -54,10 +50,14 @@ const Header = props => (
   </Container>
 );
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(SessionsActions, dispatch);
+Header.propTypes = {
+  destroySessionRequest: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators(SessionsActions, dispatch);
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withRouter(Header));

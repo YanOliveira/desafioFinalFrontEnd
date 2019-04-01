@@ -16,7 +16,8 @@ import { creators as UsersActions } from "../../store/ducks/users";
 class Preferences extends Component {
   static propTypes = {
     updateUserRequest: PropTypes.func.isRequired,
-    history: PropTypes.func.isRequired
+    history: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
   };
 
   state = {

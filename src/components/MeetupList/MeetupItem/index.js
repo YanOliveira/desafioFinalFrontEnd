@@ -5,24 +5,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BASE_URL } from '../../../services/api';
 
 import { Container, Info } from './styles';
+import PropTypes from 'prop-types'
 
-const MeetupItem = props => (
+const MeetupItem = ({
+  meetup: {
+    file_id, title, users, meetup_id, id,
+  },
+}) => (
   <Container>
-    <img src={`${BASE_URL}/files/${props.meetup.file_id}`} alt={props.meetup.title} />
+    <img src={`${BASE_URL}/files/${file_id}`} alt={title} />
     <div>
       <Info>
-        <strong>
-          {props.meetup.title.length > 10
-            ? `${props.meetup.title.substr(0, 22)}...`
-            : props.meetup.title}
-        </strong>
-        <span>{props.meetup.users.length} Inscritos</span>
+        <strong>{title.length > 10 ? `${title.substr(0, 22)}...` : title}</strong>
+        <span>{users.length} Inscritos</span>
       </Info>
-      <Link to={`meetup/${props.meetup.meetup_id || props.meetup.id}`}>
+      <Link to={`meetup/${meetup_id || id}`}>
         <FontAwesomeIcon icon="angle-right" />
       </Link>
     </div>
   </Container>
 );
+
+MeetupItem.propTypes = {
+  file_id: PropTypes.string.isRequired, 
+  title: PropTypes.string.isRequired, 
+  users: PropTypes.shape.isRequired, 
+  meetup_id: PropTypes.string.isRequired, 
+  id: PropTypes.string.isRequired,
+};
 
 export default connect()(MeetupItem);

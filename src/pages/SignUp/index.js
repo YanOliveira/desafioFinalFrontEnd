@@ -1,30 +1,31 @@
-import React, { Component, Fragment } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { Component, Fragment } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { Container, Content } from "./styles";
-import { Button, Form } from "../../styles/components";
-import LogoIcon from "../../assets/images/logo.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container, Content } from './styles';
+import { Button, Form } from '../../styles/components';
+import LogoIcon from '../../assets/images/logo.svg';
 
-import { creators as usersActions } from "../../store/ducks/users";
+import { creators as usersActions } from '../../store/ducks/users';
 
 class SignUp extends Component {
   state = {
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: ""
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
   };
 
   static propTypes = {
     addUserRequest: PropTypes.func.isRequired,
-    history: PropTypes.func.isRequired
+    history: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
   };
 
-  handleSignUp = e => {
+  handleSignUp = (e) => {
     const { addUserRequest, history } = this.props;
     e.preventDefault();
     addUserRequest(this.state, history);
@@ -67,16 +68,10 @@ class SignUp extends Component {
                 name="password_confirmation"
                 placeholder="Confirmação da sua senha"
                 required
-                onChange={e =>
-                  this.setState({ password_confirmation: e.target.value })
-                }
+                onChange={e => this.setState({ password_confirmation: e.target.value })}
               />
               <Button type="submit">
-                {!!this.props.loading ? (
-                  <FontAwesomeIcon icon="spinner" pulse size="2x" />
-                ) : (
-                  "Entrar"
-                )}
+                {this.props.loading ? <FontAwesomeIcon icon="spinner" pulse size="2x" /> : 'Entrar'}
               </Button>
             </Form>
             <Link to="/signin">Já tenho conta</Link>
@@ -88,13 +83,12 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.users.loading
+  loading: state.users.loading,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(usersActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(usersActions, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withRouter(SignUp));

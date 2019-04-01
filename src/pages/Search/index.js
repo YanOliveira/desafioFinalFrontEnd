@@ -10,7 +10,18 @@ import MeetupList from "../../components/MeetupList";
 import { creators as subscriptionsActions } from "../../store/ducks/subscriptions";
 
 class Search extends Component {
-  static propTypes = {};
+  static propTypes = {
+    loadRegisteredsRequest: PropTypes.func.isRequired,
+    loadNotRegisteredsRequest: PropTypes.func.isRequired,
+    loadRecomendedsRequest: PropTypes.func.isRequired,
+    registereds: PropTypes.shape.isRequired,
+    notRegistereds: PropTypes.shape.isRequired,
+    recomendeds: PropTypes.shape.isRequired,
+    registeredsLastPage: PropTypes.shape.isRequired,
+    notRegisteredsLastPage: PropTypes.shape.isRequired,
+    recomendedsLastPage: PropTypes.shape.isRequired,
+    
+  };
 
   state = {
     registeredPage: 1,
@@ -92,6 +103,7 @@ class Search extends Component {
   };
 
   render() {
+    const { registereds, notRegistereds, recomendeds } = this.props;
     return (
       <Container>
         <Header />
@@ -109,7 +121,7 @@ class Search extends Component {
               />
             </DivSearch>
           )}
-          {this.props.registereds.length > 0 && (
+          {registereds.length > 0 && (
             <div className="list">
               <div
                 className="icon"
@@ -117,7 +129,7 @@ class Search extends Component {
               >
                 <FontAwesomeIcon icon="angle-left" />
               </div>
-              <MeetupList title="Incrições" meetups={this.props.registereds} />
+              <MeetupList title="Incrições" meetups={registereds} />
               <div
                 className="icon"
                 onClick={() => this.handlePaginateRegistereds("next")}
@@ -127,7 +139,7 @@ class Search extends Component {
             </div>
           )}
 
-          {this.props.notRegistereds.length > 0 && (
+          {notRegistereds.length > 0 && (
             <div className="list">
               <div
                 className="icon"
@@ -137,7 +149,7 @@ class Search extends Component {
               </div>
               <MeetupList
                 title="Próximos Meetups"
-                meetups={this.props.notRegistereds}
+                meetups={notRegistereds}
               />
               <div
                 className="icon"
@@ -148,7 +160,7 @@ class Search extends Component {
             </div>
           )}
 
-          {this.props.recomendeds.length > 0 && (
+          {recomendeds.length > 0 && (
             <div className="list">
               <div
                 className="icon"
@@ -158,7 +170,7 @@ class Search extends Component {
               </div>
               <MeetupList
                 title="Recomendados"
-                meetups={this.props.recomendeds}
+                meetups={recomendeds}
               />
               <div
                 className="icon"

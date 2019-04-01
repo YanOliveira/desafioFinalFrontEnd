@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Info } from './styles';
@@ -15,6 +16,19 @@ import { getUser } from '../../services/localStorage';
 class Meetup extends Component {
   state = {
     registered: false,
+  };
+
+  static propTypes = {
+    meetup: PropTypes.shape({
+      title: PropTypes.string,
+      file_id: PropTypes.string,
+      description: PropTypes.string,
+      localization: PropTypes.string,
+      users: PropTypes.shape,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
+    showMeetupRequest: PropTypes.func.isRequired,
+    createSubscriptionRequest: PropTypes.func.isRequired,
   };
 
   componentDidMount = () => {
@@ -39,18 +53,22 @@ class Meetup extends Component {
   }
 
   render() {
-    const { meetup } = this.props;
+    const {
+      meetup: {
+        title, file_id, users, description, localization,
+      },
+    } = this.props;
     return (
       <div>
         <Header />
         <Container>
-          <img src={`${BASE_URL}/files/${meetup.file_id}`} alt={meetup.title} />
+          <img src={`${BASE_URL}/files/${file_id}`} alt={title} />
           <Info>
-            <strong>{meetup.title}</strong>
-            <span>{meetup.users ? meetup.users.length : '0'} Membros</span>
-            <p>{meetup.description}</p>
+            <strong>{title}</strong>
+            <span>{users ? users.length : '0'} Membros</span>
+            <p>{description}</p>
             <span>Realizado em:</span>
-            <small>{meetup.localization}</small>
+            <small>{localization}</small>
           </Info>
 
           <button

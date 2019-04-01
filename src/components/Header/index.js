@@ -54,7 +54,6 @@ const Header = props => (
   </Container>
 );
 
-// const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch =>
   bindActionCreators(SessionsActions, dispatch);
 
@@ -62,5 +61,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(withRouter(Header));
-// mapStateToProps,
-// mapDispatchToProps

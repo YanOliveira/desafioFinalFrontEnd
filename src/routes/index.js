@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import Meetup from "../pages/Meetup";
 import NewMeetup from "../pages/NewMeetup";
 import Search from "../pages/Search";
+import Notfound from '../pages/NotFound'
 
 const Routes = () => (
   <BrowserRouter>
@@ -20,8 +21,9 @@ const Routes = () => (
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/meetup/:id" component={Meetup} />
         <PrivateRoute path="/newmeetup" component={NewMeetup} />
+        <PrivateRoute path="/notfound" component={Notfound}/>
         <WithoutAuthenticationRoute path="/signin" component={SignIn} />
-        <WithoutAuthenticationRoute path="/signup" component={SignUp} />
+        <WithoutAuthenticationRoute path="/signup" component={SignUp} />        
       </Switch>
     </Fragment>
   </BrowserRouter>

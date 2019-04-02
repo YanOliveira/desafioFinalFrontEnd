@@ -8,7 +8,7 @@ export function* showMeetup(action) {
     const { data } = yield call(api.get, `meetups/${action.payload.id}`);
     yield put(meetupsActions.showMeetupSuccess(data));
   } catch (error) {
-    yield put(meetupsActions.showMeetupFailure(error.response.data));
+    yield put(meetupsActions.showMeetupFailure(action.payload.history));
   }
 }
 

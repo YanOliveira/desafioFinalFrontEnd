@@ -42,7 +42,7 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.SHOW_SUCCESS:
       return { ...state, loading: false, meetup: action.payload.meetup };
     case Types.SHOW_FAILURE:
-      action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
+      action.payload.history.push('/notfound');
       return { ...state, loading: false };
 
     case Types.UPLOAD_REQUEST:
@@ -73,17 +73,17 @@ export const creators = {
     payload: { errors },
   }),
 
-  showMeetupRequest: id => ({
+  showMeetupRequest: (id, history) => ({
     type: Types.SHOW_REQUEST,
-    payload: { id },
+    payload: { id, history },
   }),
   showMeetupSuccess: meetup => ({
     type: Types.SHOW_SUCCESS,
     payload: { meetup },
   }),
-  showMeetupFailure: errors => ({
+  showMeetupFailure: history => ({
     type: Types.SHOW_FAILURE,
-    payload: { errors },
+    payload: { history },
   }),
 
   uploadRequest: (meetup, history) => ({

@@ -32,7 +32,7 @@ class Meetup extends Component {
   };
 
   componentDidMount = () => {
-    this.props.showMeetupRequest(this.props.match.params.id);
+    this.props.showMeetupRequest(this.props.match.params.id, this.props.history);
   };
 
   handleSubscription = () => {

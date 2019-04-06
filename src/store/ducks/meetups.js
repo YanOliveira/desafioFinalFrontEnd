@@ -42,15 +42,13 @@ export default function meetups(state = INITIAL_STATE, action) {
     case Types.SHOW_SUCCESS:
       return { ...state, loading: false, meetup: action.payload.meetup };
     case Types.SHOW_FAILURE:
-      action.payload.history.push('/notfound');
+      toast.error(action.payload.error.message, { autoClose: 3000 });
       return { ...state, loading: false };
-
     case Types.UPLOAD_REQUEST:
       return { ...state, loading: true };
     case Types.UPLOAD_FAILURE:
       action.payload.errors.map(error => toast.error(error.message, { autoClose: 3000 }));
       return { ...state, loading: false };
-
     default:
       return { ...state, loading: false };
   }
@@ -81,9 +79,9 @@ export const creators = {
     type: Types.SHOW_SUCCESS,
     payload: { meetup },
   }),
-  showMeetupFailure: history => ({
+  showMeetupFailure: error => ({
     type: Types.SHOW_FAILURE,
-    payload: { history },
+    payload: { error },
   }),
 
   uploadRequest: (meetup, history) => ({

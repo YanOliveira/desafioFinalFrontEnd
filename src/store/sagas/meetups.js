@@ -8,7 +8,10 @@ export function* showMeetup(action) {
     const { data } = yield call(api.get, `meetups/${action.payload.id}`);
     yield put(meetupsActions.showMeetupSuccess(data));
   } catch (error) {
-    yield put(meetupsActions.showMeetupFailure(action.payload.history));
+    action.payload.history.push('/');
+    yield put(
+      meetupsActions.showMeetupFailure({ message: 'Não foi possível encontrar este meetup.' }),
+    );
   }
 }
 
